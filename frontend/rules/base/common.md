@@ -8,6 +8,7 @@
 - 构建工具：Vite 5+
 - HTTP 客户端：Axios
 - 包管理器：pnpm
+- 样式：CSS / Less（可选）
 
 ## 基本原则
 
@@ -18,8 +19,12 @@
 ## 组件规范
 
 ### 组件创建方式
-- ✅ 使用文件夹形式：`ComponentName/index.jsx` + `styles.css`
+- ✅ 使用文件夹形式：`ComponentName/index.jsx` + `styles.css` (或 `styles.less`)
 - ❌ 不使用单文件形式：`ComponentName.jsx`
+
+**样式文件：**
+- 默认使用 CSS：`styles.css`
+- 可选使用 Less：`styles.less` (详见 [Less 样式规范](./styles-less.md))
 
 ### 组件分类和位置
 1. **全局组件**：放在 `src/components/`
@@ -64,12 +69,34 @@ export default ComponentName
 
 ## 样式规范
 
+### 样式方案选择
+
+**默认：纯 CSS**
+- 文件扩展名：`.css`
+- 适合：简单项目、团队不熟悉预处理器
+
+**可选：Less**
+- 文件扩展名：`.less`
+- 适合：需要变量、混入、嵌套等特性
+- 详细规范：[Less 样式规范](./styles-less.md)
+
 ### 样式作用域
+
+**使用 CSS：**
 - **全局样式**：`src/assets/styles/global.css`
 - **页面样式**：页面文件夹内 `styles.css`，使用页面 id/class 前缀
 - **组件样式**：组件文件夹内 `styles.css`，使用组件 class 前缀
 
+**使用 Less：**
+- **全局样式**：`src/assets/styles/index.less` (入口文件)
+  - `variables.less` (变量定义)
+  - `mixins.less` (混入函数)
+  - `global.less` (全局样式)
+- **页面样式**：页面文件夹内 `styles.less`
+- **组件样式**：组件文件夹内 `styles.less`
+
 ### CSS 类名规范
+
 ```css
 /* 页面样式 - 添加页面前缀避免污染 */
 .home-page {
@@ -90,6 +117,25 @@ export default ComponentName
   height: 60px;
 }
 ```
+
+### Less 示例（可选）
+
+```less
+// 使用变量和混入
+@import '~@/assets/styles/variables.less';
+@import '~@/assets/styles/mixins.less';
+
+.user-card {
+  padding: @spacing-md;
+  border: 1px solid @border-color;
+
+  &__avatar {
+    .circle(60px);
+  }
+}
+```
+
+详见：[Less 样式规范完整文档](./styles-less.md)
 
 ## 状态管理规范
 

@@ -9,7 +9,8 @@ rules/
 ├── base/                    # 基础规范（模块化）
 │   ├── common.md           # 通用代码规范
 │   ├── naming.md           # 命名规范
-│   └── validation.md       # 生成前验证规则
+│   ├── validation.md       # 生成前验证规则
+│   └── styles-less.md      # Less 样式规范（可选）
 │
 ├── project-type/           # 项目类型规范
 │   ├── solo.md             # 单人项目
@@ -22,10 +23,12 @@ rules/
 │
 ├── presets/                # 预设规范集（推荐使用）
 │   ├── solo-medium.md      # 单人项目 + 中质量 ⭐ 推荐
+│   ├── solo-medium-less.md # 单人项目 + 中质量 + Less
 │   ├── team-high.md        # 小组项目 + 高质量
 │   └── ...                 # 其他组合
 │
-└── README.md               # 本文件
+├── README.md               # 本文件
+└── USAGE_CURSOR_CLAUDE.md  # Cursor/Claude 使用指南
 ```
 
 ## 🚀 快速开始
@@ -103,12 +106,13 @@ rules/
 
 ### 预设规范集推荐
 
-| 预设 | 适用场景 | 开发效率 | 代码质量 |
-|------|---------|---------|---------|
-| **solo-medium** ⭐ | 个人项目常规开发 | ⚡⚡⚡ 高 | ⭐⭐⭐ 中 |
-| solo-low | 快速原型、实验 | ⚡⚡⚡⚡ 最高 | ⭐⭐ 低 |
-| team-high | 团队核心模块 | ⚡⚡ 中 | ⭐⭐⭐⭐⭐ 最高 |
-| team-medium | 团队常规开发 | ⚡⚡⚡ 高 | ⭐⭐⭐⭐ 高 |
+| 预设 | 适用场景 | 开发效率 | 代码质量 | 样式方案 |
+|------|---------|---------|---------|---------|
+| **solo-medium** ⭐ | 个人项目常规开发 | ⚡⚡⚡ 高 | ⭐⭐⭐ 中 | CSS |
+| **solo-medium-less** | 个人项目 + Less | ⚡⚡⚡ 高 | ⭐⭐⭐ 中 | Less 💅 |
+| solo-low | 快速原型、实验 | ⚡⚡⚡⚡ 最高 | ⭐⭐ 低 | CSS |
+| team-high | 团队核心模块 | ⚡⚡ 中 | ⭐⭐⭐⭐⭐ 最高 | CSS |
+| team-medium | 团队常规开发 | ⚡⚡⚡ 高 | ⭐⭐⭐⭐ 高 | CSS |
 
 ### 项目类型选择
 
@@ -145,6 +149,21 @@ rules/
 - ✅ 实验性功能
 - ⏱️ 开发最快，质量基本
 - ⚠️ 需要后续优化
+
+### 样式方案选择
+
+**CSS（默认）**
+- ✅ 简单项目
+- ✅ 团队不熟悉预处理器
+- ✅ 不需要高级特性
+- 📝 文件：`.css`
+
+**Less（可选）** 💅
+- ✅ 需要变量、混入、嵌套
+- ✅ 希望代码复用性更强
+- ✅ 统一管理设计 token
+- 📝 文件：`.less`
+- 📚 详见：[Less 样式规范](./base/styles-less.md)
 
 ## 💡 使用示例
 
@@ -206,6 +225,26 @@ AI 会快速生成代码，允许：
 - 简化错误处理
 - 使用 index 作为 key
 - 最小化文档
+
+### 示例 4：使用 Less
+
+```markdown
+使用单人项目中质量规范（Less 版本）创建用户卡片：
+
+**需求：**
+- 组件名：UserCard
+- 位置：src/components/UserCard/
+- 样式方案：Less
+- 使用变量和混入
+
+**规范：** frontend/rules/presets/solo-medium-less.md
+```
+
+AI 会生成支持 Less 的代码：
+- 样式文件为 `.less`
+- 使用 Less 变量（`@primary-color`, `@spacing-md`）
+- 使用混入（`.flex-center()`, `.circle(60px)`）
+- BEM 命名 + Less 嵌套
 
 ## 🔧 规范文件内容
 
