@@ -113,6 +113,62 @@ touch .cursorrules
 - 是否有明显的命名冲突
 ```
 
+**选项 A-3：使用 i18n 版本**
+
+```markdown
+# .cursorrules
+
+# AI 代码生成规范（i18n 版本）
+请严格遵循以下规范生成代码：
+
+参考规范文件：frontend/rules/presets/solo-medium-i18n.md
+
+## 核心要求
+- 项目类型：单人项目
+- 质量级别：中等
+- 技术栈：React + Vite + Axios + pnpm
+- 国际化：react-i18next 🌍
+
+## 必须遵守
+- 组件使用文件夹形式（ComponentName/index.jsx + styles.css）
+- 安装 i18next 和 react-i18next
+- 所有用户可见文本使用 t() 函数翻译
+- 组件中使用 useTranslation hook
+- 语料文件按命名空间组织（common、pages、components、messages）
+- 支持至少 zh-CN 和 en-US 两种语言
+- 全局组件放在 src/components/，页面组件放在页面的 components/
+- API 请求使用统一的 axios 实例
+- 跨层级传递使用 React Context，不要深层 props drilling
+- 列表渲染必须使用稳定的 key
+- 基本的错误处理和 loading 状态
+
+## i18n 规范
+- 语料文件：locales/zh-CN/, locales/en-US/
+- 命名空间：common, pages, components, messages
+- 使用有意义的语料 key 名称
+- 所有语言保持相同的语料结构
+- 变量使用有意义的名称（如 {{userName}} 而非 {{0}}）
+
+## 命名规范
+- 组件：PascalCase
+- 函数/变量：camelCase
+- 常量：UPPER_SNAKE_CASE
+- CSS 类名：kebab-case
+- 语料 key：camelCase 或 kebab-case
+
+## 验证要求
+生成代码前必须检查：
+- 文件路径是否正确（全局组件 vs 页面组件）
+- 组件是否使用文件夹形式
+- 是否安装了 i18next 和 react-i18next
+- 组件中是否导入并使用了 useTranslation
+- 用户可见文本是否都使用 t() 函数
+- 语料文件是否已创建（zh-CN、en-US）
+- 语料结构是否一致
+- 命名是否符合规范
+- 是否有明显的命名冲突
+```
+
 **选项 B：完整内联规范**
 
 ```markdown
@@ -171,6 +227,12 @@ touch .cursorrules
 @frontend/rules/presets/solo-medium-less.md 请按照这个规范创建一个用户卡片组件，使用 Less 样式
 ```
 
+```markdown
+# 在 Cursor Chat 中输入（i18n 版本）
+
+@frontend/rules/presets/solo-medium-i18n.md 请按照这个规范创建一个用户列表页面，支持中英文切换
+```
+
 或者引用多个文件：
 
 ```markdown
@@ -183,6 +245,13 @@ touch .cursorrules
 
 @frontend/rules/base/common.md @frontend/rules/base/styles-less.md
 请按照这些规范创建带 Less 样式的用户卡片组件
+```
+
+```markdown
+# 引用 i18n 国际化规范
+
+@frontend/rules/base/common.md @frontend/rules/base/i18n.md
+请按照这些规范创建支持多语言的用户管理页面
 ```
 
 ### 方法 3：使用 Composer 模式
@@ -419,6 +488,97 @@ touch CLAUDE.md
 详细规范请参考：frontend/rules/ 目录下的完整文档
 ```
 
+**选项 A-3：引用预设规范（i18n 版本）** 🌍
+
+```markdown
+# CLAUDE.md
+
+## 对话设置
+- 始终使用中文回答问题
+- 破坏性更新请循环，不要自动执行
+
+## AI 代码生成规范
+
+本项目使用 AI 代码生成规范，详见：`frontend/rules/presets/solo-medium-i18n.md`
+
+### 核心配置
+- 项目类型：单人项目
+- 质量级别：中等
+- 技术栈：React 18 + Vite 5 + Axios + pnpm
+- 国际化：react-i18next ⭐
+
+### 必须遵守的规范
+
+#### 组件规范
+- 组件使用文件夹形式：ComponentName/index.jsx + styles.css
+- 全局组件放在 src/components/
+- 页面组件放在页面同级的 components/
+- 路径共享组件放在共同路径的 components/
+
+#### 国际化规范
+- 安装依赖：i18next、react-i18next
+- 组件中使用 useTranslation hook
+- 所有用户可见文本通过 t() 函数翻译
+- 语料文件结构：
+  ```
+  src/locales/
+  ├── zh-CN/       # 中文语料
+  │   ├── common.json
+  │   ├── pages.json
+  │   ├── components.json
+  │   └── messages.json
+  ├── en-US/       # 英文语料
+  │   ├── common.json
+  │   ├── pages.json
+  │   ├── components.json
+  │   └── messages.json
+  └── index.js     # i18n 配置
+  ```
+- 语料按命名空间组织（common、pages、components、messages）
+- 所有语言的语料结构必须一致
+- 使用有意义的语料 key 和变量名
+
+#### 状态管理
+- 跨层级传递使用 React Context
+- 不要使用深层 props drilling（超过 2 层）
+
+#### API 请求
+- 统一使用 src/api/request.js 的 axios 实例
+- 必须有基本的错误处理
+- API 模块按资源组织（user.js, product.js）
+
+#### 命名规范
+- 组件：PascalCase (UserCard)
+- 函数/变量：camelCase (handleClick)
+- 常量：UPPER_SNAKE_CASE (API_BASE_URL)
+- CSS 类名：kebab-case (user-card)
+- Hook：use + PascalCase (useAuth)
+- 语料 key：camelCase 或 kebab-case
+
+#### 代码检查
+- ESLint 无 error（允许少量 warning）
+- 复杂组件建议添加 PropTypes
+- 列表渲染必须使用稳定的 key
+- 基本的 loading 和 error 状态处理
+- i18n 配置正确
+- 所有用户可见文本都通过 t() 翻译
+
+### 生成前验证
+生成代码前必须确认：
+- [ ] 文件路径正确（全局/页面组件）
+- [ ] 使用文件夹形式
+- [ ] 安装了 i18next 和 react-i18next
+- [ ] 组件中导入并使用了 useTranslation
+- [ ] 用户可见文本使用 t() 函数
+- [ ] 语料文件已创建（至少 zh-CN、en-US）
+- [ ] 语料结构一致
+- [ ] 命名符合规范
+- [ ] 无明显冲突
+- [ ] 依赖已安装
+
+详细规范请参考：frontend/rules/ 目录下的完整文档
+```
+
 **选项 B：嵌入完整规范**
 
 ```markdown
@@ -513,6 +673,37 @@ touch CLAUDE.md
 - frontend/rules/quality-level/medium.md
 
 然后创建一个带 Less 样式的产品卡片组件。
+```
+
+#### 使用示例（i18n 版本）
+
+```markdown
+# 在 Claude Code 对话框中
+
+请阅读 frontend/rules/presets/solo-medium-i18n.md，
+然后按照规范创建一个支持多语言的用户管理页面。
+
+要求：
+- 页面路径：src/pages/UserManagement/
+- 功能：用户列表展示、搜索、分页
+- 国际化：支持中文（zh-CN）和英文（en-US）
+- 使用 react-i18next
+- 所有用户可见文本通过 t() 函数翻译
+- 创建对应的语料文件
+```
+
+或者引用 i18n 国际化规范：
+
+```markdown
+请阅读以下规范文件：
+- frontend/rules/base/common.md
+- frontend/rules/base/i18n.md
+- frontend/rules/quality-level/medium.md
+
+然后创建一个支持多语言的产品列表页面：
+- 支持 zh-CN 和 en-US
+- 创建完整的语料文件
+- 提供语言切换功能
 ```
 
 ### 方法 3：使用 Read 工具
@@ -659,6 +850,83 @@ EOF
 # 3. 提交到版本控制
 git add CLAUDE.md
 git commit -m "docs: 添加 AI 代码生成规范（Less）"
+```
+
+#### Cursor 项目（i18n 版本）
+
+```bash
+# 1. 创建 .cursorrules
+cat > .cursorrules << 'EOF'
+# AI 代码生成规范（i18n 版本）
+参考规范：frontend/rules/presets/solo-medium-i18n.md
+
+项目配置：
+- 类型：单人项目
+- 质量：中等
+- 技术栈：React + Vite + Axios
+- 国际化：react-i18next 🌍
+
+核心规范：
+- 组件文件夹形式（index.jsx + styles.css）
+- 使用 useTranslation hook
+- 所有用户可见文本使用 t() 函数
+- 语料按命名空间组织
+- 支持 zh-CN 和 en-US
+- Context 跨层级传递
+- 统一 axios 实例
+- 基本错误处理
+EOF
+
+# 2. 安装 i18n 依赖
+pnpm install i18next react-i18next
+
+# 3. 创建语料文件结构
+mkdir -p src/locales/zh-CN src/locales/en-US
+touch src/locales/index.js
+touch src/locales/zh-CN/{common,pages,components,messages}.json
+touch src/locales/en-US/{common,pages,components,messages}.json
+
+# 4. 添加到 .gitignore（可选）
+echo ".cursorrules" >> .gitignore  # 如果规范是个人偏好
+```
+
+#### Claude Code 项目（i18n 版本）
+
+```bash
+# 1. 安装 i18n 依赖
+pnpm install i18next react-i18next
+
+# 2. 创建语料文件结构
+mkdir -p src/locales/zh-CN src/locales/en-US
+touch src/locales/index.js
+touch src/locales/zh-CN/{common,pages,components,messages}.json
+touch src/locales/en-US/{common,pages,components,messages}.json
+
+# 3. 编辑或创建 CLAUDE.md
+cat >> CLAUDE.md << 'EOF'
+
+## AI 代码生成规范（i18n 版本）
+
+使用规范：frontend/rules/presets/solo-medium-i18n.md
+
+核心要求：
+- 组件文件夹形式（index.jsx + styles.css）
+- 使用 useTranslation hook
+- 所有用户可见文本使用 t() 函数
+- 语料文件：locales/zh-CN/, locales/en-US/
+- 语料按命名空间组织（common, pages, components, messages）
+- 全局组件在 src/components/
+- 页面组件在页面的 components/
+- Context 跨层级传递
+- 统一 axios 实例
+- 所有语言的语料结构必须一致
+
+详见：frontend/rules/ 完整规范文档
+EOF
+
+# 4. 提交到版本控制
+git add CLAUDE.md src/locales
+git commit -m "docs: 添加 AI 代码生成规范（i18n）"
 ```
 
 ### 2. 团队项目配置
@@ -891,6 +1159,51 @@ frontend/rules/quality-level/high.md
    - 使用混入：.flex-center(), .circle(60px)
    ```
 
+### Q11: 是否应该使用 i18n 国际化？
+
+**A: 选择建议：**
+
+**需要使用 i18n：**
+- ✅ 项目需要支持多语言
+- ✅ 面向国际用户
+- ✅ 需要动态切换语言
+- 使用：`frontend/rules/presets/solo-medium-i18n.md`
+- 安装：`pnpm install i18next react-i18next`
+
+**不需要使用 i18n：**
+- ❌ 仅单一语言项目
+- ❌ 只面向特定地区用户
+- ❌ 无国际化需求
+- 使用：`frontend/rules/presets/solo-medium.md`
+
+**从无 i18n 迁移到 i18n：**
+1. 安装依赖：`pnpm install i18next react-i18next`
+2. 创建语料文件结构（locales/zh-CN/, locales/en-US/）
+3. 配置 i18n（src/locales/index.js）
+4. 提取硬编码文本到语料文件
+5. 组件中使用 useTranslation hook
+6. 使用 t() 函数替换硬编码文本
+7. 详见：`frontend/rules/base/i18n.md`
+
+### Q12: AI 生成的 i18n 代码不符合规范？
+
+**A: 解决方法：**
+1. 明确指定使用 i18n 版本规范：`solo-medium-i18n.md`
+2. 检查是否安装了 i18next 和 react-i18next
+3. 检查组件是否导入并使用了 useTranslation
+4. 检查所有用户可见文本是否使用 t() 函数
+5. 检查语料文件是否已创建
+6. 检查所有语言的语料结构是否一致
+7. 示例提示：
+   ```markdown
+   请使用 i18n 规范创建组件：
+   - 组件中使用 useTranslation hook
+   - 所有用户可见文本通过 t() 函数翻译
+   - 创建语料文件：locales/zh-CN/components.json, locales/en-US/components.json
+   - 语料按命名空间组织
+   - 使用有意义的语料 key 名称
+   ```
+
 ---
 
 ## 快速参考
@@ -916,6 +1229,18 @@ frontend/rules/quality-level/high.md
 - 统一 axios 实例
 ```
 
+**i18n 版本：**
+```markdown
+# .cursorrules
+参考：frontend/rules/presets/solo-medium-i18n.md
+- 组件文件夹形式（index.jsx + styles.css）
+- 使用 useTranslation hook
+- 所有用户可见文本使用 t() 函数
+- 语料按命名空间组织
+- Context 跨层级传递
+- 统一 axios 实例
+```
+
 ### Claude Code 最简配置
 
 **CSS 版本：**
@@ -935,6 +1260,16 @@ frontend/rules/quality-level/high.md
 核心要求见上述规范文件
 ```
 
+**i18n 版本：**
+```markdown
+# CLAUDE.md
+## AI 代码生成规范（i18n）
+使用规范：frontend/rules/presets/solo-medium-i18n.md
+国际化：react-i18next，支持 zh-CN 和 en-US
+核心要求：useTranslation + t() 函数
+核心要求见上述规范文件
+```
+
 ### 快速切换命令
 
 **Cursor（CSS）:**
@@ -947,6 +1282,11 @@ frontend/rules/quality-level/high.md
 @frontend/rules/presets/solo-medium-less.md [你的需求，使用 Less 样式]
 ```
 
+**Cursor（i18n）:**
+```
+@frontend/rules/presets/solo-medium-i18n.md [你的需求，支持多语言]
+```
+
 **Claude Code（CSS）:**
 ```
 请按照 frontend/rules/presets/solo-medium.md 生成 [你的需求]
@@ -956,6 +1296,12 @@ frontend/rules/quality-level/high.md
 ```
 请按照 frontend/rules/presets/solo-medium-less.md 生成 [你的需求]
 要求使用 Less 变量和混入
+```
+
+**Claude Code（i18n）:**
+```
+请按照 frontend/rules/presets/solo-medium-i18n.md 生成 [你的需求]
+要求支持 zh-CN 和 en-US，所有用户可见文本使用 t() 函数
 ```
 
 ---
@@ -977,6 +1323,7 @@ frontend/rules/quality-level/high.md
 ### 通用建议
 - 从预设规范开始（`solo-medium` 或 `team-high`）
 - 选择样式方案（CSS 默认，Less 可选）
+- 选择国际化方案（无 i18n 默认，react-i18next 可选）
 - 根据模块重要性调整质量级别
 - 定期回顾和更新规范
 - 团队项目统一规范配置
@@ -985,4 +1332,8 @@ frontend/rules/quality-level/high.md
 - **CSS**：简单项目，团队不熟悉预处理器 → `solo-medium.md`
 - **Less**：需要变量、混入、嵌套 → `solo-medium-less.md`
 
-开始使用：选择一个预设规范（CSS 或 Less 版本），配置到你的 `.cursorrules` 或 `CLAUDE.md` 中！
+### 国际化方案选择
+- **无 i18n**：单一语言项目 → `solo-medium.md`
+- **react-i18next**：需要多语言支持 → `solo-medium-i18n.md`
+
+开始使用：选择一个预设规范（CSS、Less 或 i18n 版本），配置到你的 `.cursorrules` 或 `CLAUDE.md` 中！

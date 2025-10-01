@@ -10,7 +10,8 @@ rules/
 │   ├── common.md           # 通用代码规范
 │   ├── naming.md           # 命名规范
 │   ├── validation.md       # 生成前验证规则
-│   └── styles-less.md      # Less 样式规范（可选）
+│   ├── styles-less.md      # Less 样式规范（可选）
+│   └── i18n.md             # 国际化规范（可选）
 │
 ├── project-type/           # 项目类型规范
 │   ├── solo.md             # 单人项目
@@ -24,6 +25,7 @@ rules/
 ├── presets/                # 预设规范集（推荐使用）
 │   ├── solo-medium.md      # 单人项目 + 中质量 ⭐ 推荐
 │   ├── solo-medium-less.md # 单人项目 + 中质量 + Less
+│   ├── solo-medium-i18n.md # 单人项目 + 中质量 + i18n
 │   ├── team-high.md        # 小组项目 + 高质量
 │   └── ...                 # 其他组合
 │
@@ -106,13 +108,14 @@ rules/
 
 ### 预设规范集推荐
 
-| 预设 | 适用场景 | 开发效率 | 代码质量 | 样式方案 |
-|------|---------|---------|---------|---------|
-| **solo-medium** ⭐ | 个人项目常规开发 | ⚡⚡⚡ 高 | ⭐⭐⭐ 中 | CSS |
-| **solo-medium-less** | 个人项目 + Less | ⚡⚡⚡ 高 | ⭐⭐⭐ 中 | Less 💅 |
-| solo-low | 快速原型、实验 | ⚡⚡⚡⚡ 最高 | ⭐⭐ 低 | CSS |
-| team-high | 团队核心模块 | ⚡⚡ 中 | ⭐⭐⭐⭐⭐ 最高 | CSS |
-| team-medium | 团队常规开发 | ⚡⚡⚡ 高 | ⭐⭐⭐⭐ 高 | CSS |
+| 预设 | 适用场景 | 开发效率 | 代码质量 | 样式方案 | 国际化 |
+|------|---------|---------|---------|---------|------|
+| **solo-medium** ⭐ | 个人项目常规开发 | ⚡⚡⚡ 高 | ⭐⭐⭐ 中 | CSS | - |
+| **solo-medium-less** | 个人项目 + Less | ⚡⚡⚡ 高 | ⭐⭐⭐ 中 | Less 💅 | - |
+| **solo-medium-i18n** | 个人项目 + 多语言 | ⚡⚡⚡ 高 | ⭐⭐⭐ 中 | CSS | i18n 🌍 |
+| solo-low | 快速原型、实验 | ⚡⚡⚡⚡ 最高 | ⭐⭐ 低 | CSS | - |
+| team-high | 团队核心模块 | ⚡⚡ 中 | ⭐⭐⭐⭐⭐ 最高 | CSS | - |
+| team-medium | 团队常规开发 | ⚡⚡⚡ 高 | ⭐⭐⭐⭐ 高 | CSS | - |
 
 ### 项目类型选择
 
@@ -164,6 +167,20 @@ rules/
 - ✅ 统一管理设计 token
 - 📝 文件：`.less`
 - 📚 详见：[Less 样式规范](./base/styles-less.md)
+
+### 国际化方案选择
+
+**不使用 i18n（默认）**
+- ✅ 单一语言项目
+- ✅ 快速开发
+- ✅ 无额外依赖
+
+**使用 i18n（可选）** 🌍
+- ✅ 需要支持多语言
+- ✅ 国际化业务需求
+- ✅ 使用 react-i18next
+- 📝 语料文件：`locales/zh-CN/`, `locales/en-US/`
+- 📚 详见：[i18n 国际化规范](./base/i18n.md)
 
 ## 💡 使用示例
 
@@ -246,6 +263,27 @@ AI 会生成支持 Less 的代码：
 - 使用混入（`.flex-center()`, `.circle(60px)`）
 - BEM 命名 + Less 嵌套
 
+### 示例 5：使用 i18n
+
+```markdown
+使用单人项目中质量规范（i18n 版本）创建用户列表页面：
+
+**需求：**
+- 页面路径：src/pages/UserList/
+- 功能：用户列表展示、搜索、分页
+- 国际化：支持中文和英文
+- 使用 react-i18next
+
+**规范：** frontend/rules/presets/solo-medium-i18n.md
+```
+
+AI 会生成支持多语言的代码：
+- 组件中使用 `useTranslation` hook
+- 用户可见文本通过 `t()` 函数翻译
+- 创建语料文件（`locales/zh-CN/`, `locales/en-US/`）
+- 语料按命名空间组织（common、pages、components、messages）
+- 提供语言切换功能
+
 ## 🔧 规范文件内容
 
 ### base/ - 基础规范模块
@@ -316,14 +354,16 @@ AI 会生成支持 Less 的代码：
 
 常用组合，开箱即用：
 
-| 预设 | 项目类型 | 质量级别 | 说明 |
-|------|---------|---------|------|
-| solo-medium | 单人 | 中 | ⭐ 最推荐，适合大多数个人项目 |
-| solo-high | 单人 | 高 | 个人项目的核心模块 |
-| solo-low | 单人 | 低 | 快速原型验证 |
-| team-high | 小组 | 高 | 团队协作的核心模块 |
-| team-medium | 小组 | 中 | 团队日常开发 |
-| team-low | 小组 | 低 | 团队快速验证（不推荐） |
+| 预设 | 项目类型 | 质量级别 | 特性 | 说明 |
+|------|---------|---------|------|------|
+| solo-medium | 单人 | 中 | CSS | ⭐ 最推荐，适合大多数个人项目 |
+| solo-medium-less | 单人 | 中 | Less 💅 | 个人项目 + Less 样式预处理器 |
+| solo-medium-i18n | 单人 | 中 | i18n 🌍 | 个人项目 + 多语言支持 |
+| solo-high | 单人 | 高 | CSS | 个人项目的核心模块 |
+| solo-low | 单人 | 低 | CSS | 快速原型验证 |
+| team-high | 小组 | 高 | CSS | 团队协作的核心模块 |
+| team-medium | 小组 | 中 | CSS | 团队日常开发 |
+| team-low | 小组 | 低 | CSS | 团队快速验证（不推荐） |
 
 ## 📝 最佳实践
 
