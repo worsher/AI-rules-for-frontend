@@ -148,6 +148,8 @@ touch .cursorrules
 - 使用有意义的语料 key 名称
 - 所有语言保持相同的语料结构
 - 变量使用有意义的名称（如 {{userName}} 而非 {{0}}）
+- 在根节点设置语言 className：lang-${i18n.language}
+- 为关键 UI 组件添加语言样式适配
 
 ## 命名规范
 - 组件：PascalCase
@@ -165,6 +167,61 @@ touch .cursorrules
 - 用户可见文本是否都使用 t() 函数
 - 语料文件是否已创建（zh-CN、en-US）
 - 语料结构是否一致
+- 命名是否符合规范
+- 是否有明显的命名冲突
+```
+
+**选项 A-4：使用响应式版本** 📱💻
+
+```markdown
+# .cursorrules
+
+# AI 代码生成规范（响应式版本）
+请严格遵循以下规范生成代码：
+
+参考规范文件：frontend/rules/presets/solo-medium-responsive.md
+
+## 核心要求
+- 项目类型：单人项目
+- 质量级别：中等
+- 技术栈：React + Vite + Axios + pnpm
+- 响应式：PC + H5 兼容 📱💻
+
+## 必须遵守
+- 组件使用文件夹形式（ComponentName/index.jsx + styles.css）
+- 设置正确的 viewport meta 标签
+- 使用响应式布局（媒体查询或 useMediaQuery hook）
+- PC 和移动端交互差异化（hover 仅 PC，active 仅移动端）
+- 移动端触摸区域至少 44x44px
+- 全局组件放在 src/components/，页面组件放在页面的 components/
+- API 请求使用统一的 axios 实例
+- 跨层级传递使用 React Context，不要深层 props drilling
+- 列表渲染必须使用稳定的 key
+- 基本的错误处理和 loading 状态
+
+## 响应式规范
+- 断点：768px（平板）、1024px（PC）
+- 移动优先设计方法
+- 使用 useMediaQuery hook 判断设备
+- PC 端 hover 效果：@media (hover: hover)
+- 移动端流畅滚动：-webkit-overflow-scrolling: touch
+- 注意移动端特有问题（1px 边框、安全区域）
+
+## 命名规范
+- 组件：PascalCase
+- 函数/变量：camelCase
+- 常量：UPPER_SNAKE_CASE
+- CSS 类名：kebab-case
+
+## 验证要求
+生成代码前必须检查：
+- 文件路径是否正确（全局组件 vs 页面组件）
+- 组件是否使用文件夹形式
+- 是否设置了 viewport meta 标签
+- 样式是否使用了媒体查询或响应式单位
+- 是否创建了 useMediaQuery hook
+- PC 端 hover 效果是否仅在 PC 生效
+- 移动端触摸区域是否足够大（≥ 44px）
 - 命名是否符合规范
 - 是否有明显的命名冲突
 ```
@@ -254,6 +311,19 @@ touch .cursorrules
 请按照这些规范创建支持多语言的用户管理页面
 ```
 
+```markdown
+# 引用响应式设计规范
+
+@frontend/rules/base/common.md @frontend/rules/base/responsive.md
+请按照这些规范创建响应式的产品列表页面，需要同时支持 PC 和移动端
+```
+
+```markdown
+# 在 Cursor Chat 中输入（响应式版本）
+
+@frontend/rules/presets/solo-medium-responsive.md 请按照这个规范创建一个用户列表页面，需要在 PC 和 H5 上都有良好的显示效果
+```
+
 ### 方法 3：使用 Composer 模式
 
 在 Cursor 的 Composer 模式中，可以一次性提供完整上下文。
@@ -300,6 +370,33 @@ touch .cursorrules
 - 使用 @spacing-md、@primary-color 等变量
 - 使用 .flex-center()、.text-ellipsis() 等混入
 - BEM 命名配合 Less 嵌套
+
+请先生成计划，确认后再生成代码。
+```
+
+**响应式版本：**
+
+```markdown
+# Composer 输入框
+
+使用以下规范：
+@frontend/rules/presets/solo-medium-responsive.md
+
+任务：
+创建一个产品列表页面，包含：
+- 产品卡片列表（响应式布局）
+- 搜索功能
+- 分类筛选
+- PC 端多列展示，移动端单列展示
+- PC 端 hover 效果，移动端触摸反馈
+
+要求：
+- 设置 viewport meta 标签
+- 使用 useMediaQuery hook 判断设备
+- 断点：768px（平板）、1024px（PC）
+- 移动优先设计
+- PC hover 仅在 PC 生效
+- 移动端触摸区域至少 44x44px
 
 请先生成计划，确认后再生成代码。
 ```
@@ -537,6 +634,8 @@ touch CLAUDE.md
 - 语料按命名空间组织（common、pages、components、messages）
 - 所有语言的语料结构必须一致
 - 使用有意义的语料 key 和变量名
+- 在根节点设置语言 className（lang-${i18n.language}）
+- 为关键 UI 组件（按钮、标签、表单）添加语言样式适配
 
 #### 状态管理
 - 跨层级传递使用 React Context
@@ -572,9 +671,90 @@ touch CLAUDE.md
 - [ ] 用户可见文本使用 t() 函数
 - [ ] 语料文件已创建（至少 zh-CN、en-US）
 - [ ] 语料结构一致
+- [ ] 在 App.jsx 中设置了语言 className
+- [ ] 关键 UI 组件添加了语言样式适配
 - [ ] 命名符合规范
 - [ ] 无明显冲突
 - [ ] 依赖已安装
+
+详细规范请参考：frontend/rules/ 目录下的完整文档
+```
+
+**选项 A-4：引用预设规范（响应式版本）** 📱💻
+
+```markdown
+# CLAUDE.md
+
+## 对话设置
+- 始终使用中文回答问题
+- 破坏性更新请循环，不要自动执行
+
+## AI 代码生成规范
+
+本项目使用 AI 代码生成规范，详见：`frontend/rules/presets/solo-medium-responsive.md`
+
+### 核心配置
+- 项目类型：单人项目
+- 质量级别：中等
+- 技术栈：React 18 + Vite 5 + Axios + pnpm
+- 响应式：PC + H5 兼容 ⭐
+
+### 必须遵守的规范
+
+#### 组件规范
+- 组件使用文件夹形式：ComponentName/index.jsx + styles.css
+- 全局组件放在 src/components/
+- 页面组件放在页面同级的 components/
+- 路径共享组件放在共同路径的 components/
+
+#### 响应式规范
+- 设置正确的 viewport meta 标签：
+  ```html
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  ```
+- 使用响应式断点：768px（平板）、1024px（PC）
+- 创建并使用 useMediaQuery hook 判断设备
+- 移动优先设计方法
+- PC 和移动端交互差异化：
+  - PC 端：hover 效果仅在 @media (hover: hover) 中
+  - 移动端：使用 active 状态，触摸区域至少 44x44px
+- 使用媒体查询或响应式单位（rem、vw）
+- 注意移动端特有问题（1px 边框、安全区域、流畅滚动）
+
+#### 状态管理
+- 跨层级传递使用 React Context
+- 不要使用深层 props drilling（超过 2 层）
+
+#### API 请求
+- 统一使用 src/api/request.js 的 axios 实例
+- 必须有基本的错误处理
+- API 模块按资源组织（user.js, product.js）
+
+#### 命名规范
+- 组件：PascalCase (UserCard)
+- 函数/变量：camelCase (handleClick)
+- 常量：UPPER_SNAKE_CASE (API_BASE_URL)
+- CSS 类名：kebab-case (user-card)
+- Hook：use + PascalCase (useAuth)
+
+#### 代码检查
+- ESLint 无 error（允许少量 warning）
+- 复杂组件建议添加 PropTypes
+- 列表渲染必须使用稳定的 key
+- 基本的 loading 和 error 状态处理
+- PC 和移动端都能正常显示和交互
+
+### 生成前验证
+生成代码前必须确认：
+- [ ] 文件路径正确（全局/页面组件）
+- [ ] 使用文件夹形式
+- [ ] 设置了 viewport meta 标签
+- [ ] 样式使用了媒体查询或响应式单位
+- [ ] 创建了 useMediaQuery hook
+- [ ] PC 端 hover 效果仅在 PC 生效
+- [ ] 移动端触摸区域足够大（≥ 44px）
+- [ ] 命名符合规范
+- [ ] 无明显冲突
 
 详细规范请参考：frontend/rules/ 目录下的完整文档
 ```
@@ -704,6 +884,39 @@ touch CLAUDE.md
 - 支持 zh-CN 和 en-US
 - 创建完整的语料文件
 - 提供语言切换功能
+```
+
+#### 使用示例（响应式版本）
+
+```markdown
+# 在 Claude Code 对话框中
+
+请阅读 frontend/rules/presets/solo-medium-responsive.md，
+然后按照规范创建一个用户列表页面。
+
+要求：
+- 页面路径：src/pages/UserList/
+- 功能：用户列表展示、搜索
+- 响应式：同时支持 PC 和移动端
+- PC 端：多列布局，支持 hover 效果
+- 移动端：单列布局，触摸优化
+- 使用 useMediaQuery hook 判断设备
+- 设置正确的 viewport meta 标签
+```
+
+或者引用响应式设计规范：
+
+```markdown
+请阅读以下规范文件：
+- frontend/rules/base/common.md
+- frontend/rules/base/responsive.md
+- frontend/rules/quality-level/medium.md
+
+然后创建一个响应式的产品列表页面：
+- PC 端：3 列网格布局，hover 显示详情
+- 移动端：单列布局，点击展开详情
+- 使用媒体查询适配不同屏幕
+- 移动端触摸区域至少 44x44px
 ```
 
 ### 方法 3：使用 Read 工具
@@ -927,6 +1140,163 @@ EOF
 # 4. 提交到版本控制
 git add CLAUDE.md src/locales
 git commit -m "docs: 添加 AI 代码生成规范（i18n）"
+```
+
+#### Cursor 项目（响应式版本）
+
+```bash
+# 1. 创建 .cursorrules
+cat > .cursorrules << 'EOF'
+# AI 代码生成规范（响应式版本）
+参考规范：frontend/rules/presets/solo-medium-responsive.md
+
+项目配置：
+- 类型：单人项目
+- 质量：中等
+- 技术栈：React + Vite + Axios
+- 响应式：PC + H5 兼容 📱💻
+
+核心规范：
+- 组件文件夹形式（index.jsx + styles.css）
+- 设置 viewport meta 标签
+- 使用 useMediaQuery hook 判断设备
+- 断点：768px（平板）、1024px（PC）
+- PC hover 仅在 @media (hover: hover) 中
+- 移动端触摸区域至少 44x44px
+- Context 跨层级传递
+- 统一 axios 实例
+- 基本错误处理
+EOF
+
+# 2. 在 index.html 中设置 viewport
+# 确保 index.html 包含以下 meta 标签
+# <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+# 3. 创建 useMediaQuery hook
+mkdir -p src/hooks
+cat > src/hooks/useMediaQuery.js << 'EOF'
+import { useState, useEffect } from 'react'
+
+export function useMediaQuery(query) {
+  const [matches, setMatches] = useState(() => {
+    if (typeof window !== 'undefined') {
+      return window.matchMedia(query).matches
+    }
+    return false
+  })
+
+  useEffect(() => {
+    const media = window.matchMedia(query)
+    const listener = (event) => setMatches(event.matches)
+
+    if (media.addEventListener) {
+      media.addEventListener('change', listener)
+    } else {
+      media.addListener(listener)
+    }
+
+    return () => {
+      if (media.removeEventListener) {
+        media.removeEventListener('change', listener)
+      } else {
+        media.removeListener(listener)
+      }
+    }
+  }, [query])
+
+  return matches
+}
+
+export function useIsMobile() {
+  return useMediaQuery('(max-width: 767px)')
+}
+
+export function useIsDesktop() {
+  return useMediaQuery('(min-width: 1024px)')
+}
+EOF
+
+# 4. 添加到 .gitignore（可选）
+echo ".cursorrules" >> .gitignore  # 如果规范是个人偏好
+```
+
+#### Claude Code 项目（响应式版本）
+
+```bash
+# 1. 在 index.html 中设置 viewport
+# 确保 index.html 包含以下 meta 标签
+# <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+# 2. 创建 useMediaQuery hook
+mkdir -p src/hooks
+cat > src/hooks/useMediaQuery.js << 'EOF'
+import { useState, useEffect } from 'react'
+
+export function useMediaQuery(query) {
+  const [matches, setMatches] = useState(() => {
+    if (typeof window !== 'undefined') {
+      return window.matchMedia(query).matches
+    }
+    return false
+  })
+
+  useEffect(() => {
+    const media = window.matchMedia(query)
+    const listener = (event) => setMatches(event.matches)
+
+    if (media.addEventListener) {
+      media.addEventListener('change', listener)
+    } else {
+      media.addListener(listener)
+    }
+
+    return () => {
+      if (media.removeEventListener) {
+        media.removeEventListener('change', listener)
+      } else {
+        media.removeListener(listener)
+      }
+    }
+  }, [query])
+
+  return matches
+}
+
+export function useIsMobile() {
+  return useMediaQuery('(max-width: 767px)')
+}
+
+export function useIsDesktop() {
+  return useMediaQuery('(min-width: 1024px)')
+}
+EOF
+
+# 3. 编辑或创建 CLAUDE.md
+cat >> CLAUDE.md << 'EOF'
+
+## AI 代码生成规范（响应式版本）
+
+使用规范：frontend/rules/presets/solo-medium-responsive.md
+
+核心要求：
+- 组件文件夹形式（index.jsx + styles.css）
+- 设置 viewport meta 标签
+- 使用 useMediaQuery hook 判断设备
+- 响应式断点：768px（平板）、1024px（PC）
+- 移动优先设计
+- PC hover 仅在 @media (hover: hover) 中
+- 移动端触摸区域至少 44x44px
+- 全局组件在 src/components/
+- 页面组件在页面的 components/
+- Context 跨层级传递
+- 统一 axios 实例
+
+详见：frontend/rules/ 完整规范文档
+EOF
+
+# 4. 提交到版本控制
+git add CLAUDE.md src/hooks/useMediaQuery.js
+git commit -m "docs: 添加 AI 代码生成规范（响应式）"
 ```
 
 ### 2. 团队项目配置
@@ -1202,6 +1572,56 @@ frontend/rules/quality-level/high.md
    - 创建语料文件：locales/zh-CN/components.json, locales/en-US/components.json
    - 语料按命名空间组织
    - 使用有意义的语料 key 名称
+   - 在 App.jsx 中设置语言 className：root.classList.add(`lang-${i18n.language}`)
+   - 为按钮、标签等 UI 组件添加语言样式适配（.lang-zh-CN、.lang-en-US）
+   ```
+
+### Q13: 是否应该使用响应式设计？
+
+**A: 选择建议：**
+
+**需要使用响应式：**
+- ✅ 项目需要同时支持 PC 和移动端
+- ✅ 希望使用单一代码库
+- ✅ 页面结构相似
+- ✅ SEO 友好（单一 URL）
+- 使用：`frontend/rules/presets/solo-medium-responsive.md`
+- 方案：媒体查询、rem、vw、useMediaQuery hook
+
+**不需要使用响应式：**
+- ❌ 仅 PC 或仅移动端
+- ❌ 单一平台项目
+- ❌ 无需跨平台适配
+- 使用：`frontend/rules/presets/solo-medium.md`
+
+**从非响应式迁移到响应式：**
+1. 在 index.html 添加 viewport meta 标签
+2. 创建 useMediaQuery hook（src/hooks/useMediaQuery.js）
+3. 更新样式为响应式：
+   - 使用移动优先方式
+   - 添加媒体查询断点（768px、1024px）
+   - 区分 PC 和移动端交互（hover vs active）
+4. 测试不同设备（Chrome DevTools 设备模拟）
+5. 详见：`frontend/rules/base/responsive.md`
+
+### Q14: AI 生成的响应式代码不符合规范？
+
+**A: 解决方法：**
+1. 明确指定使用响应式版本规范：`solo-medium-responsive.md`
+2. 检查是否设置了 viewport meta 标签
+3. 检查是否创建了 useMediaQuery hook
+4. 检查样式是否使用了媒体查询
+5. 检查 PC hover 效果是否仅在 @media (hover: hover) 中
+6. 检查移动端触摸区域是否足够大（≥ 44px）
+7. 示例提示：
+   ```markdown
+   请使用响应式规范创建组件：
+   - 设置 viewport: <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   - 创建 useMediaQuery hook
+   - 使用媒体查询：@media (max-width: 767px) 和 @media (min-width: 1024px)
+   - PC hover 仅在 @media (hover: hover) 中
+   - 移动端触摸区域至少 44x44px
+   - 移动优先设计方法
    ```
 
 ---
@@ -1241,6 +1661,20 @@ frontend/rules/quality-level/high.md
 - 统一 axios 实例
 ```
 
+**响应式版本：**
+```markdown
+# .cursorrules
+参考：frontend/rules/presets/solo-medium-responsive.md
+- 组件文件夹形式（index.jsx + styles.css）
+- 设置 viewport meta 标签
+- 使用 useMediaQuery hook 判断设备
+- 断点：768px（平板）、1024px（PC）
+- PC hover 仅在 @media (hover: hover) 中
+- 移动端触摸区域至少 44x44px
+- Context 跨层级传递
+- 统一 axios 实例
+```
+
 ### Claude Code 最简配置
 
 **CSS 版本：**
@@ -1270,6 +1704,16 @@ frontend/rules/quality-level/high.md
 核心要求见上述规范文件
 ```
 
+**响应式版本：**
+```markdown
+# CLAUDE.md
+## AI 代码生成规范（响应式）
+使用规范：frontend/rules/presets/solo-medium-responsive.md
+响应式：PC + H5 兼容，使用 useMediaQuery hook
+核心要求：viewport + 媒体查询 + 设备判断
+核心要求见上述规范文件
+```
+
 ### 快速切换命令
 
 **Cursor（CSS）:**
@@ -1287,6 +1731,11 @@ frontend/rules/quality-level/high.md
 @frontend/rules/presets/solo-medium-i18n.md [你的需求，支持多语言]
 ```
 
+**Cursor（响应式）:**
+```
+@frontend/rules/presets/solo-medium-responsive.md [你的需求，需要 PC 和 H5 兼容]
+```
+
 **Claude Code（CSS）:**
 ```
 请按照 frontend/rules/presets/solo-medium.md 生成 [你的需求]
@@ -1302,6 +1751,12 @@ frontend/rules/quality-level/high.md
 ```
 请按照 frontend/rules/presets/solo-medium-i18n.md 生成 [你的需求]
 要求支持 zh-CN 和 en-US，所有用户可见文本使用 t() 函数
+```
+
+**Claude Code（响应式）:**
+```
+请按照 frontend/rules/presets/solo-medium-responsive.md 生成 [你的需求]
+要求同时支持 PC 和移动端，使用 useMediaQuery hook
 ```
 
 ---
@@ -1324,6 +1779,7 @@ frontend/rules/quality-level/high.md
 - 从预设规范开始（`solo-medium` 或 `team-high`）
 - 选择样式方案（CSS 默认，Less 可选）
 - 选择国际化方案（无 i18n 默认，react-i18next 可选）
+- 选择响应式方案（单平台默认，PC + H5 可选）
 - 根据模块重要性调整质量级别
 - 定期回顾和更新规范
 - 团队项目统一规范配置
@@ -1336,4 +1792,8 @@ frontend/rules/quality-level/high.md
 - **无 i18n**：单一语言项目 → `solo-medium.md`
 - **react-i18next**：需要多语言支持 → `solo-medium-i18n.md`
 
-开始使用：选择一个预设规范（CSS、Less 或 i18n 版本），配置到你的 `.cursorrules` 或 `CLAUDE.md` 中！
+### 响应式方案选择
+- **单平台**：仅 PC 或仅移动端 → `solo-medium.md`
+- **PC + H5**：需要跨平台兼容 → `solo-medium-responsive.md`
+
+开始使用：选择一个预设规范（CSS、Less、i18n 或响应式版本），配置到你的 `.cursorrules` 或 `CLAUDE.md` 中！

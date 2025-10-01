@@ -10,6 +10,7 @@
 - 包管理器：pnpm
 - 样式：CSS / Less（可选）
 - 国际化：react-i18next（可选）
+- 响应式：媒体查询 / rem / vw（可选）
 
 ## 基本原则
 
@@ -340,6 +341,78 @@ function MyComponent() {
 ```
 
 详细规范请参考：[i18n 国际化规范完整文档](./i18n.md)
+
+## 响应式设计（可选）
+
+### 是否使用响应式
+
+**需要 PC + H5 兼容时使用：**
+- ✅ 项目需要同时支持 PC 和移动端
+- ✅ 使用媒体查询、rem、vw 等方案
+- 📝 详见：[响应式设计规范](./responsive.md)
+
+**单一平台时：**
+- ❌ 仅 PC 或仅移动端
+- ❌ 无需响应式适配
+
+### 响应式方案选择
+
+**方案 1：统一响应式（推荐）**
+- 一套代码，使用媒体查询适配
+- 适合：页面结构相似、中小型项目
+
+**方案 2：独立版本**
+- PC 和 H5 独立路由和组件
+- 适合：PC 和 H5 差异大、大型项目
+
+**方案 3：响应式 + 独立组件**
+- 基础布局响应式，复杂组件分版本
+- 适合：平衡开发效率和用户体验
+
+### 基本使用
+
+```jsx
+// 安装：无需额外依赖，使用原生 CSS
+
+// 使用媒体查询
+import './styles.css'
+
+function MyComponent() {
+  return <div className="responsive-box">内容</div>
+}
+```
+
+```css
+/* 移动优先 */
+.responsive-box {
+  width: 100%;
+  padding: 10px;
+}
+
+/* PC 端 */
+@media (min-width: 1024px) {
+  .responsive-box {
+    width: 1200px;
+    margin: 0 auto;
+    padding: 30px;
+  }
+}
+```
+
+```jsx
+// 使用 useMediaQuery hook
+import { useMediaQuery } from './hooks/useMediaQuery'
+
+function MyComponent() {
+  const isMobile = useMediaQuery('(max-width: 767px)')
+
+  return (
+    <div>{isMobile ? '移动端内容' : 'PC 端内容'}</div>
+  )
+}
+```
+
+详细规范请参考：[响应式设计规范完整文档](./responsive.md)
 
 ## 环境变量
 

@@ -11,7 +11,8 @@ rules/
 │   ├── naming.md           # 命名规范
 │   ├── validation.md       # 生成前验证规则
 │   ├── styles-less.md      # Less 样式规范（可选）
-│   └── i18n.md             # 国际化规范（可选）
+│   ├── i18n.md             # 国际化规范（可选）
+│   └── responsive.md       # 响应式设计规范（可选）
 │
 ├── project-type/           # 项目类型规范
 │   ├── solo.md             # 单人项目
@@ -22,12 +23,13 @@ rules/
 │   ├── medium.md           # 中质量（平衡）
 │   └── low.md              # 低质量（快速）
 │
-├── presets/                # 预设规范集（推荐使用）
-│   ├── solo-medium.md      # 单人项目 + 中质量 ⭐ 推荐
-│   ├── solo-medium-less.md # 单人项目 + 中质量 + Less
-│   ├── solo-medium-i18n.md # 单人项目 + 中质量 + i18n
-│   ├── team-high.md        # 小组项目 + 高质量
-│   └── ...                 # 其他组合
+├── presets/                       # 预设规范集（推荐使用）
+│   ├── solo-medium.md             # 单人项目 + 中质量 ⭐ 推荐
+│   ├── solo-medium-less.md        # 单人项目 + 中质量 + Less
+│   ├── solo-medium-i18n.md        # 单人项目 + 中质量 + i18n
+│   ├── solo-medium-responsive.md  # 单人项目 + 中质量 + 响应式
+│   ├── team-high.md               # 小组项目 + 高质量
+│   └── ...                        # 其他组合
 │
 ├── README.md               # 本文件
 └── USAGE_CURSOR_CLAUDE.md  # Cursor/Claude 使用指南
@@ -108,14 +110,15 @@ rules/
 
 ### 预设规范集推荐
 
-| 预设 | 适用场景 | 开发效率 | 代码质量 | 样式方案 | 国际化 |
-|------|---------|---------|---------|---------|------|
-| **solo-medium** ⭐ | 个人项目常规开发 | ⚡⚡⚡ 高 | ⭐⭐⭐ 中 | CSS | - |
-| **solo-medium-less** | 个人项目 + Less | ⚡⚡⚡ 高 | ⭐⭐⭐ 中 | Less 💅 | - |
-| **solo-medium-i18n** | 个人项目 + 多语言 | ⚡⚡⚡ 高 | ⭐⭐⭐ 中 | CSS | i18n 🌍 |
-| solo-low | 快速原型、实验 | ⚡⚡⚡⚡ 最高 | ⭐⭐ 低 | CSS | - |
-| team-high | 团队核心模块 | ⚡⚡ 中 | ⭐⭐⭐⭐⭐ 最高 | CSS | - |
-| team-medium | 团队常规开发 | ⚡⚡⚡ 高 | ⭐⭐⭐⭐ 高 | CSS | - |
+| 预设 | 适用场景 | 开发效率 | 代码质量 | 样式方案 | 国际化 | 响应式 |
+|------|---------|---------|---------|---------|------|------|
+| **solo-medium** ⭐ | 个人项目常规开发 | ⚡⚡⚡ 高 | ⭐⭐⭐ 中 | CSS | - | - |
+| **solo-medium-less** | 个人项目 + Less | ⚡⚡⚡ 高 | ⭐⭐⭐ 中 | Less 💅 | - | - |
+| **solo-medium-i18n** | 个人项目 + 多语言 | ⚡⚡⚡ 高 | ⭐⭐⭐ 中 | CSS | i18n 🌍 | - |
+| **solo-medium-responsive** | 个人项目 + PC/H5 | ⚡⚡⚡ 高 | ⭐⭐⭐ 中 | CSS | - | 📱💻 |
+| solo-low | 快速原型、实验 | ⚡⚡⚡⚡ 最高 | ⭐⭐ 低 | CSS | - | - |
+| team-high | 团队核心模块 | ⚡⚡ 中 | ⭐⭐⭐⭐⭐ 最高 | CSS | - | - |
+| team-medium | 团队常规开发 | ⚡⚡⚡ 高 | ⭐⭐⭐⭐ 高 | CSS | - | - |
 
 ### 项目类型选择
 
@@ -181,6 +184,20 @@ rules/
 - ✅ 使用 react-i18next
 - 📝 语料文件：`locales/zh-CN/`, `locales/en-US/`
 - 📚 详见：[i18n 国际化规范](./base/i18n.md)
+
+### 响应式方案选择
+
+**不使用响应式（默认）**
+- ✅ 仅 PC 或仅移动端
+- ✅ 单一平台项目
+- ✅ 无需多端适配
+
+**使用响应式（可选）** 📱💻
+- ✅ 需要同时支持 PC 和 H5
+- ✅ 跨平台业务需求
+- ✅ 使用媒体查询、rem、vw 等
+- 📝 断点：768px（平板）、1024px（PC）
+- 📚 详见：[响应式设计规范](./base/responsive.md)
 
 ## 💡 使用示例
 
@@ -283,6 +300,29 @@ AI 会生成支持多语言的代码：
 - 创建语料文件（`locales/zh-CN/`, `locales/en-US/`）
 - 语料按命名空间组织（common、pages、components、messages）
 - 提供语言切换功能
+
+### 示例 6：使用响应式
+
+```markdown
+使用单人项目中质量规范（响应式版本）创建用户列表页面：
+
+**需求：**
+- 页面路径：src/pages/UserList/
+- 功能：用户列表展示、搜索
+- 响应式：同时支持 PC 和移动端
+- PC 端：多列布局，支持 hover 效果
+- 移动端：单列布局，触摸优化
+
+**规范：** frontend/rules/presets/solo-medium-responsive.md
+```
+
+AI 会生成响应式代码：
+- 组件使用 `useMediaQuery` hook 判断设备
+- 样式使用媒体查询适配不同屏幕
+- PC 端 hover 效果仅在 PC 生效
+- 移动端触摸区域至少 44x44px
+- 移动端流畅滚动优化
+- 设置正确的 viewport meta 标签
 
 ## 🔧 规范文件内容
 

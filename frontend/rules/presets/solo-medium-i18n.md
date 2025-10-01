@@ -318,7 +318,125 @@ try {
 }
 ```
 
-### 9. 代码检查
+### 9. 语言样式适配
+
+为了更好地适配不同语言的显示效果，需要在根节点添加语言标识，并针对中英文差异进行样式调整。
+
+**在 App.jsx 中设置语言标识：**
+
+```jsx
+// src/App.jsx
+import { useEffect } from 'react'
+import { useTranslation } from 'react-i18next'
+import Header from './components/Header'
+
+function App() {
+  const { i18n } = useTranslation()
+
+  useEffect(() => {
+    // 在根元素添加语言 class
+    const root = document.getElementById('root')
+    if (root) {
+      root.classList.remove('lang-zh-CN', 'lang-en-US')
+      root.classList.add(`lang-${i18n.language}`)
+    }
+
+    // 设置 html 的 lang 属性（有利于 SEO）
+    document.documentElement.lang = i18n.language
+  }, [i18n.language])
+
+  return (
+    <div className="app">
+      <Header />
+      {/* 其他内容 */}
+    </div>
+  )
+}
+
+export default App
+```
+
+**样式适配示例：**
+
+```css
+/* src/components/UserCard/styles.css */
+
+.user-card {
+  display: flex;
+  padding: 20px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+}
+
+.user-card__button {
+  padding: 6px 16px;
+  min-width: 80px;
+  background-color: #1890ff;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+/* 中文按钮样式 */
+.lang-zh-CN .user-card__button {
+  min-width: 60px;  /* 中文较短 */
+  padding: 6px 12px;
+}
+
+/* 英文按钮样式 */
+.lang-en-US .user-card__button {
+  min-width: 100px;  /* 英文较长 */
+  padding: 6px 20px;
+}
+
+/* 文本换行处理 */
+.user-card__bio {
+  margin: 0 0 12px;
+  font-size: 14px;
+  color: #666;
+  line-height: 1.6;
+}
+
+/* 中文：可以在任意位置换行 */
+.lang-zh-CN .user-card__bio {
+  word-break: break-all;
+}
+
+/* 英文：在单词边界换行 */
+.lang-en-US .user-card__bio {
+  word-break: break-word;
+  hyphens: auto;
+}
+
+/* 表单标签宽度 */
+.form-label {
+  display: inline-block;
+  width: 100px;
+  text-align: right;
+}
+
+.lang-zh-CN .form-label {
+  width: 80px;  /* 中文标签：用户名、密码 */
+}
+
+.lang-en-US .form-label {
+  width: 120px;  /* 英文标签：Username、Password */
+}
+```
+
+**常见场景适配：**
+
+| 场景 | 中文 | 英文 | CSS 属性 |
+|------|------|------|---------|
+| 按钮 | min-width: 60px | min-width: 100px | padding, min-width |
+| 导航项 | min-width: 60px | min-width: 100px | padding, min-width |
+| 表单标签 | width: 70-80px | width: 120-130px | width, text-align |
+| 文本换行 | word-break: break-all | word-break: break-word | word-break, hyphens |
+
+详细说明见 [i18n 语言样式兼容](../base/i18n.md#语言样式兼容)
+
+### 10. 代码检查
 
 ```
 ✅ 必须：
@@ -344,11 +462,12 @@ try {
 3. 所有用户可见文本使用 `t()` 函数
 4. 语料文件按命名空间组织（common、pages、components、messages）
 5. 所有支持的语言保持相同的语料结构
-6. 使用统一的 axios 实例
-7. API 请求有基本错误处理
-8. 列表渲染使用 key
-9. 无硬编码敏感信息
-10. ESLint 无 error
+6. 在根节点设置语言 className（`lang-${i18n.language}`）
+7. 使用统一的 axios 实例
+8. API 请求有基本错误处理
+9. 列表渲染使用 key
+10. 无硬编码敏感信息
+11. ESLint 无 error
 
 ### 💡 建议遵守
 
@@ -356,8 +475,10 @@ try {
 2. 使用有意义的语料 key 名称
 3. 使用命名空间隔离语料
 4. 变量使用有意义的名称（如 `{{userName}}` 而非 `{{0}}`）
-5. 复杂组件添加 PropTypes
-6. 重要函数添加注释
+5. 为关键 UI 组件（按钮、标签、表单）添加语言样式适配
+6. 注意中英文文本长度差异，调整宽度和高度
+7. 复杂组件添加 PropTypes
+8. 重要函数添加注释
 
 ### 🆓 可选
 
@@ -482,6 +603,8 @@ pnpm install i18next react-i18next
 - [ ] 用户可见文本使用 `t()` 函数
 - [ ] 语料文件已创建（至少 zh-CN、en-US）
 - [ ] 语料文件结构一致
+- [ ] 在 App.jsx 中设置了语言 className
+- [ ] 关键 UI 组件添加了语言样式适配
 - [ ] API 请求有错误处理
 - [ ] 列表有 key
 - [ ] 无硬编码敏感信息
