@@ -1329,6 +1329,46 @@ git commit -m "docs: 添加 AI 代码生成规范（响应式）"
 详细规范：frontend/rules/project-type/team.md
 ```
 
+#### Cursor 团队项目（Less + i18n 版本）
+
+```bash
+# .cursorrules (提交到 git)
+cat > .cursorrules << 'EOF'
+# 团队 AI 代码生成规范（Less + i18n 版本）
+规范文件：frontend/rules/presets/team-high-less-i18n.md
+
+## 强制要求
+- 项目类型：小组项目（3-5人）
+- 质量级别：高（最严格）
+- 样式方案：Less 💅
+- 国际化：react-i18next 🌍
+- 所有代码必须经过 Review
+
+## 核心规范
+- 所有组件必须有 PropTypes、defaultProps 和 JSDoc
+- 所有组件必须有 README.md
+- 样式使用 Less 变量和混入
+- 所有用户可见文本使用 t() 函数
+- 在根节点设置语言 className
+- 为关键 UI 组件添加语言样式适配
+- ESLint 0 errors, 0 warnings
+- 完整的错误处理
+- 使用 useCallback/useMemo 优化性能
+- 完整的可访问性支持
+
+## Git 提交规范
+<type>(<scope>): <subject>
+
+类型：feat, fix, docs, style, refactor, perf, test, chore
+
+## 依赖
+- pnpm install -D less
+- pnpm install i18next react-i18next
+
+详细规范：frontend/rules/presets/team-high-less-i18n.md
+EOF
+```
+
 #### Claude Code 团队项目
 
 ```markdown
@@ -1355,6 +1395,132 @@ git commit -m "docs: 添加 AI 代码生成规范（响应式）"
 遵循 Conventional Commits 格式
 
 详见：frontend/rules/project-type/team.md
+```
+
+#### Claude Code 团队项目（Less + i18n 版本）
+
+```bash
+# 1. 安装 Less 和 i18n 依赖
+pnpm install -D less
+pnpm install i18next react-i18next
+
+# 2. 创建语料文件结构
+mkdir -p src/locales/zh-CN src/locales/en-US
+touch src/locales/index.js
+touch src/locales/zh-CN/{common,pages,components,messages}.json
+touch src/locales/en-US/{common,pages,components,messages}.json
+
+# 3. 创建 Less 变量和混入文件
+mkdir -p src/assets/styles
+touch src/assets/styles/variables.less
+touch src/assets/styles/mixins.less
+
+# 4. 编辑或创建 CLAUDE.md
+cat >> CLAUDE.md << 'EOF'
+
+## 团队开发约定（Less + i18n 版本）
+
+### AI 代码生成规范
+
+使用规范：frontend/rules/presets/team-high-less-i18n.md
+
+### 强制要求
+
+#### 组件规范
+- 所有组件必须有完整的 PropTypes 和 defaultProps
+- 所有导出函数必须有 JSDoc 注释
+- 复杂组件（20+ 行）必须有 README.md
+- 组件使用文件夹形式：ComponentName/index.jsx + styles.less + README.md
+
+#### Less 样式规范
+- 样式文件使用 .less 扩展名
+- 导入全局变量和混入：
+  ```less
+  @import '~@/assets/styles/variables.less';
+  @import '~@/assets/styles/mixins.less';
+  ```
+- 使用变量替代硬编码值（颜色、间距、字体等）
+- 使用混入复用样式模式
+- Less 嵌套不超过 3 层
+- BEM 命名配合 Less 嵌套
+
+#### 国际化规范
+- 安装依赖：i18next、react-i18next
+- 组件中使用 useTranslation hook
+- 所有用户可见文本通过 t() 函数翻译
+- 语料文件结构：
+  ```
+  src/locales/
+  ├── zh-CN/       # 中文语料
+  │   ├── common.json
+  │   ├── pages.json
+  │   ├── components.json
+  │   └── messages.json
+  ├── en-US/       # 英文语料
+  │   ├── common.json
+  │   ├── pages.json
+  │   ├── components.json
+  │   └── messages.json
+  └── index.js     # i18n 配置
+  ```
+- 语料按命名空间组织（common、pages、components、messages）
+- 所有语言的语料结构必须一致
+- 使用有意义的语料 key 和变量名
+- 在根节点设置语言 className（lang-${i18n.language}）
+- 为关键 UI 组件（按钮、标签、表单）添加语言样式适配
+
+#### 代码质量
+- ESLint: 0 errors, 0 warnings
+- 处理所有状态：loading、error、empty、success
+- 事件处理使用 useCallback
+- 计算使用 useMemo
+- 列表渲染使用稳定的 key
+
+#### 可访问性
+- 图片有 alt 属性和懒加载
+- 表单控件有关联的 label
+- 按钮有清晰文本或 aria-label
+- 可交互元素支持键盘操作
+
+#### 团队协作
+- 代码经过团队 Review
+- Git 提交遵循 Conventional Commits 格式
+- 无 console.log、debugger
+- 无硬编码敏感信息
+
+### 代码审查要求
+- 至少 1 人 Review
+- PropTypes 和 JSDoc 完整
+- Less 样式规范正确
+- i18n 配置和翻译完整
+- 语言样式适配合理
+- 错误处理完善
+- 可访问性支持
+- 必须通过 ESLint (0 errors, 0 warnings)
+- 必须通过构建测试
+
+### Git 规范
+遵循 Conventional Commits 格式：
+
+```
+<type>(<scope>): <subject>
+
+类型：feat, fix, docs, style, refactor, perf, test, chore
+```
+
+### 依赖检查
+- [ ] 安装了 Less：pnpm install -D less
+- [ ] 安装了 i18next：pnpm install i18next react-i18next
+- [ ] 创建了 Less 变量和混入文件
+- [ ] 创建了语料文件结构
+- [ ] 配置了 i18n（src/locales/index.js）
+
+详细规范：frontend/rules/presets/team-high-less-i18n.md
+EOF
+
+# 5. 提交到版本控制
+git add CLAUDE.md src/locales src/assets/styles
+git commit -m "docs: 添加团队 AI 代码生成规范（Less + i18n）"
 ```
 
 ### 3. 不同模块使用不同规范

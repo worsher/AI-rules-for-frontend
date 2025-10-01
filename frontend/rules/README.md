@@ -324,6 +324,33 @@ AI 会生成响应式代码：
 - 移动端流畅滚动优化
 - 设置正确的 viewport meta 标签
 
+### 示例 7：团队核心模块（Less + i18n）
+
+```markdown
+使用团队项目高质量规范（Less + i18n 版本）创建用户管理模块：
+
+**需求：**
+- 页面路径：src/pages/UserManagement/
+- 功能：用户列表、搜索、分页、详情
+- 样式方案：Less
+- 国际化：支持中文和英文
+- 质量要求：最高
+
+**规范：** frontend/rules/presets/team-high-less-i18n.md
+```
+
+AI 会生成最高质量代码，包括：
+- 完整的 PropTypes、defaultProps 和 JSDoc
+- 完整的错误处理（loading/error/empty/success）
+- Less 样式使用变量和混入
+- 完整的多语言支持（zh-CN、en-US）
+- 语言样式自动适配
+- 性能优化（useCallback/useMemo）
+- 完整的可访问性支持
+- 完整的组件 README.md
+- 键盘导航支持
+- 符合团队 Code Review 标准
+
 ## 🔧 规范文件内容
 
 ### base/ - 基础规范模块
@@ -399,9 +426,11 @@ AI 会生成响应式代码：
 | solo-medium | 单人 | 中 | CSS | ⭐ 最推荐，适合大多数个人项目 |
 | solo-medium-less | 单人 | 中 | Less 💅 | 个人项目 + Less 样式预处理器 |
 | solo-medium-i18n | 单人 | 中 | i18n 🌍 | 个人项目 + 多语言支持 |
+| solo-medium-responsive | 单人 | 中 | 响应式 📱💻 | 个人项目 + PC/H5 兼容 |
 | solo-high | 单人 | 高 | CSS | 个人项目的核心模块 |
 | solo-low | 单人 | 低 | CSS | 快速原型验证 |
 | team-high | 小组 | 高 | CSS | 团队协作的核心模块 |
+| team-high-less-i18n | 小组 | 高 | Less + i18n 💅🌍 | 团队核心模块 + Less + 多语言 |
 | team-medium | 小组 | 中 | CSS | 团队日常开发 |
 | team-low | 小组 | 低 | CSS | 团队快速验证（不推荐） |
 
