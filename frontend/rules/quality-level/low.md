@@ -2,6 +2,10 @@
 
 > 适用于快速原型、实验性功能，优先保证功能实现
 
+> ESLint 配置：使用 `quality-level/low.eslintrc.js`，TypeScript 项目可在此基础上扩展 `@typescript-eslint/*` 规则。
+
+> TypeScript 配置：使用 `quality-level/low.tsconfig.json`
+
 ## 适用场景
 
 - 快速原型验证

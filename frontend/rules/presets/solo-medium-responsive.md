@@ -2,6 +2,13 @@
 
 > 适合需要同时支持 PC 和 H5 的个人项目
 
+## 组合说明
+
+- **基础规范**：[`base/common.md`](../base/common.md)、[`base/naming.md`](../base/naming.md)、[`base/validation.md`](../base/validation.md)、[`base/responsive.md`](../base/responsive.md)
+- **项目类型**：[`project-type/solo.md`](../project-type/solo.md)
+- **质量级别**：[`quality-level/medium.md`](../quality-level/medium.md)
+- **可选拓展**：按需叠加 [`base/i18n.md`](../base/i18n.md)、[`base/styles-less.md`](../base/styles-less.md)
+
 ## 配置说明
 
 - **项目类型**：单人项目
@@ -487,9 +494,9 @@ if (isMobile && !location.pathname.startsWith('/m/')) {
 - 快速迭代
 
 ❌ **不适合：**
-- 仅 PC 或仅移动端（使用 `solo-medium.md`）
+- 仅 PC 或仅移动端（使用 [`solo-medium.md`](./solo-medium.md)）
 - PC 和 H5 差异很大（考虑独立版本）
-- 团队协作（使用 `team-high.md` 或 `team-medium.md`）
+- 团队协作（使用 [`team-high.md`](./team-high.md) 或 [`team-medium.md`](./team-medium.md)）
 
 ## 从基础版本迁移
 

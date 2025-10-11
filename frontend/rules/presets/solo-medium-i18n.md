@@ -2,6 +2,13 @@
 
 > 适合需要多语言支持的个人项目
 
+## 组合说明
+
+- **基础规范**：[`base/common.md`](../base/common.md)、[`base/naming.md`](../base/naming.md)、[`base/validation.md`](../base/validation.md)、[`base/i18n.md`](../base/i18n.md)
+- **项目类型**：[`project-type/solo.md`](../project-type/solo.md)
+- **质量级别**：[`quality-level/medium.md`](../quality-level/medium.md)
+- **可选拓展**：按需叠加 [`base/styles-less.md`](../base/styles-less.md)、[`base/responsive.md`](../base/responsive.md)
+
 ## 配置说明
 
 - **项目类型**：单人项目
@@ -618,9 +625,9 @@ pnpm install i18next react-i18next
 - 快速迭代但需要保持一定质量
 
 ❌ **不适合：**
-- 不需要多语言支持（使用 `solo-medium.md`）
+- 不需要多语言支持（使用 [`solo-medium.md`](./solo-medium.md)）
 - 需要超过 10 种语言（考虑使用专业翻译管理平台）
-- 团队协作（使用 `team-high.md` 或 `team-medium.md`）
+- 团队协作（使用 [`team-high.md`](./team-high.md) 或 [`team-medium.md`](./team-medium.md)）
 
 ## 从基础版本迁移
 

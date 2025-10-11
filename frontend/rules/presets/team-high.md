@@ -2,6 +2,13 @@
 
 > 适合3-5人团队协作的核心模块
 
+## 组合说明
+
+- **基础规范**：[`base/common.md`](../base/common.md)、[`base/naming.md`](../base/naming.md)、[`base/validation.md`](../base/validation.md)
+- **项目类型**：[`project-type/team.md`](../project-type/team.md)
+- **质量级别**：[`quality-level/high.md`](../quality-level/high.md)
+- **可选拓展**：按需叠加 [`base/i18n.md`](../base/i18n.md)、[`base/styles-less.md`](../base/styles-less.md)、[`base/responsive.md`](../base/responsive.md)
+
 ## 配置说明
 
 - **项目类型**：小组项目（3-5人）

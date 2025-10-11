@@ -2,6 +2,13 @@
 
 > 适合团队协作的核心模块，高质量要求，支持 Less 样式和多语言
 
+## 组合说明
+
+- **基础规范**：[`base/common.md`](../base/common.md)、[`base/naming.md`](../base/naming.md)、[`base/validation.md`](../base/validation.md)、[`base/styles-less.md`](../base/styles-less.md)、[`base/i18n.md`](../base/i18n.md)
+- **项目类型**：[`project-type/team.md`](../project-type/team.md)
+- **质量级别**：[`quality-level/high.md`](../quality-level/high.md)
+- **可选拓展**：按需叠加 [`base/responsive.md`](../base/responsive.md) 适配多端
+
 ## 配置说明
 
 - **项目类型**：小组项目（3-5人）
@@ -945,10 +952,10 @@ export default App
 - 需要统一设计规范的项目
 
 ❌ **不适合：**
-- 个人项目（使用 `solo-medium-less-i18n.md`）
-- 快速原型（使用 `solo-low.md`）
-- 单一语言项目（使用 `team-high-less.md`）
-- 不需要 Less 的项目（使用 `team-high-i18n.md`）
+- 个人项目（组合 [`solo-medium-less.md`](./solo-medium-less.md) + [`solo-medium-i18n.md`](./solo-medium-i18n.md) 更合适）
+- 快速原型（使用 [`solo-low.md`](./solo-low.md)）
+- 单一语言项目（使用 [`team-high.md`](./team-high.md) 并保留 CSS 即可）
+- 不需要 Less 的项目（使用 [`team-high.md`](./team-high.md) + [`base/i18n.md`](../base/i18n.md)）
 
 ## 团队协作规范
 

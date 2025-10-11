@@ -2,6 +2,13 @@
 
 > 适合大多数个人项目的默认配置，使用 Less 作为样式方案
 
+## 组合说明
+
+- **基础规范**：[`base/common.md`](../base/common.md)、[`base/naming.md`](../base/naming.md)、[`base/validation.md`](../base/validation.md)、[`base/styles-less.md`](../base/styles-less.md)
+- **项目类型**：[`project-type/solo.md`](../project-type/solo.md)
+- **质量级别**：[`quality-level/medium.md`](../quality-level/medium.md)
+- **可选拓展**：按需叠加 [`base/i18n.md`](../base/i18n.md)、[`base/responsive.md`](../base/responsive.md)
+
 ## 配置说明
 
 - **项目类型**：单人项目

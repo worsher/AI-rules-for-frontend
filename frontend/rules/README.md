@@ -112,13 +112,13 @@ rules/
 
 | 预设 | 适用场景 | 开发效率 | 代码质量 | 样式方案 | 国际化 | 响应式 |
 |------|---------|---------|---------|---------|------|------|
-| **solo-medium** ⭐ | 个人项目常规开发 | ⚡⚡⚡ 高 | ⭐⭐⭐ 中 | CSS | - | - |
-| **solo-medium-less** | 个人项目 + Less | ⚡⚡⚡ 高 | ⭐⭐⭐ 中 | Less 💅 | - | - |
-| **solo-medium-i18n** | 个人项目 + 多语言 | ⚡⚡⚡ 高 | ⭐⭐⭐ 中 | CSS | i18n 🌍 | - |
-| **solo-medium-responsive** | 个人项目 + PC/H5 | ⚡⚡⚡ 高 | ⭐⭐⭐ 中 | CSS | - | 📱💻 |
-| solo-low | 快速原型、实验 | ⚡⚡⚡⚡ 最高 | ⭐⭐ 低 | CSS | - | - |
-| team-high | 团队核心模块 | ⚡⚡ 中 | ⭐⭐⭐⭐⭐ 最高 | CSS | - | - |
-| team-medium | 团队常规开发 | ⚡⚡⚡ 高 | ⭐⭐⭐⭐ 高 | CSS | - | - |
+| [**solo-medium** ⭐](./presets/solo-medium.md) | 个人项目常规开发 | ⚡⚡⚡ 高 | ⭐⭐⭐ 中 | CSS | - | - |
+| [**solo-medium-less**](./presets/solo-medium-less.md) | 个人项目 + Less | ⚡⚡⚡ 高 | ⭐⭐⭐ 中 | Less 💅 | - | - |
+| [**solo-medium-i18n**](./presets/solo-medium-i18n.md) | 个人项目 + 多语言 | ⚡⚡⚡ 高 | ⭐⭐⭐ 中 | CSS | i18n 🌍 | - |
+| [**solo-medium-responsive**](./presets/solo-medium-responsive.md) | 个人项目 + PC/H5 | ⚡⚡⚡ 高 | ⭐⭐⭐ 中 | CSS | - | 📱💻 |
+| [solo-low](./presets/solo-low.md) | 快速原型、实验 | ⚡⚡⚡⚡ 最高 | ⭐⭐ 低 | CSS | - | - |
+| [team-high](./presets/team-high.md) | 团队核心模块 | ⚡⚡ 中 | ⭐⭐⭐⭐⭐ 最高 | CSS | - | - |
+| [team-medium](./presets/team-medium.md) | 团队常规开发 | ⚡⚡⚡ 高 | ⭐⭐⭐⭐ 高 | CSS | - | - |
 
 ### 项目类型选择
 
@@ -423,16 +423,18 @@ AI 会生成最高质量代码，包括：
 
 | 预设 | 项目类型 | 质量级别 | 特性 | 说明 |
 |------|---------|---------|------|------|
-| solo-medium | 单人 | 中 | CSS | ⭐ 最推荐，适合大多数个人项目 |
-| solo-medium-less | 单人 | 中 | Less 💅 | 个人项目 + Less 样式预处理器 |
-| solo-medium-i18n | 单人 | 中 | i18n 🌍 | 个人项目 + 多语言支持 |
-| solo-medium-responsive | 单人 | 中 | 响应式 📱💻 | 个人项目 + PC/H5 兼容 |
-| solo-high | 单人 | 高 | CSS | 个人项目的核心模块 |
-| solo-low | 单人 | 低 | CSS | 快速原型验证 |
-| team-high | 小组 | 高 | CSS | 团队协作的核心模块 |
-| team-high-less-i18n | 小组 | 高 | Less + i18n 💅🌍 | 团队核心模块 + Less + 多语言 |
-| team-medium | 小组 | 中 | CSS | 团队日常开发 |
-| team-low | 小组 | 低 | CSS | 团队快速验证（不推荐） |
+| [solo-medium](./presets/solo-medium.md) | 单人 | 中 | CSS | ⭐ 最推荐，适合大多数个人项目 |
+| [solo-medium-less](./presets/solo-medium-less.md) | 单人 | 中 | Less 💅 | 个人项目 + Less 样式预处理器 |
+| [solo-medium-i18n](./presets/solo-medium-i18n.md) | 单人 | 中 | i18n 🌍 | 个人项目 + 多语言支持 |
+| [solo-medium-responsive](./presets/solo-medium-responsive.md) | 单人 | 中 | 响应式 📱💻 | 个人项目 + PC/H5 兼容 |
+| [solo-high](./presets/solo-high.md) | 单人 | 高 | CSS | 个人项目的核心模块 |
+| [solo-low](./presets/solo-low.md) | 单人 | 低 | CSS | 快速原型验证 |
+| [team-high](./presets/team-high.md) | 小组 | 高 | CSS | 团队协作的核心模块 |
+| [team-high-less-i18n](./presets/team-high-less-i18n.md) | 小组 | 高 | Less + i18n 💅🌍 | 团队核心模块 + Less + 多语言 |
+| [team-medium](./presets/team-medium.md) | 小组 | 中 | CSS | 团队日常开发 |
+| [team-low](./presets/team-low.md) | 小组 | 低 | CSS | 团队快速验证（不推荐） |
+
+> 需要脚本化读取时，可使用 [`presets/index.json`](./presets/index.json) 获取所有预设的元数据（项目类型、质量级别、特性等）。
 
 ## 📝 最佳实践
 
@@ -530,7 +532,43 @@ src/pages/prototype/ → low
 
 // 中质量级别
 "eslintConfig": "./frontend/rules/quality-level/medium.eslintrc.js"
+
+// 低质量级别（快速原型）
+"eslintConfig": "./frontend/rules/quality-level/low.eslintrc.js"
 ```
+
+> 使用上述配置前，请确保已安装 `eslint`、`eslint-plugin-react`、`eslint-plugin-react-hooks` 等依赖。
+
+如需在项目中启用 TypeScript，请安装：
+
+```bash
+pnpm add -D typescript @types/node
+```
+
+随后将 ESLint 配置扩展成适用于 TypeScript 的版本（例如增加 `@typescript-eslint` 插件），或依据团队现有规则进行调整。
+
+### TypeScript 配置
+
+将项目根目录 `tsconfig.json` 设置为扩展对应质量级别的预设即可：
+
+```jsonc
+// 高质量（严格模式）
+{
+  "extends": "./frontend/rules/quality-level/high.tsconfig.json"
+}
+
+// 中质量（平衡效率与校验）
+{
+  "extends": "./frontend/rules/quality-level/medium.tsconfig.json"
+}
+
+// 低质量（快速验证）
+{
+  "extends": "./frontend/rules/quality-level/low.tsconfig.json"
+}
+```
+
+> 预设已内置常见 React + Vite 选项以及 `@/*` 路径别名，若项目有额外需求，可在 `compilerOptions` 中继续覆盖。
 
 ### Git Hooks
 
