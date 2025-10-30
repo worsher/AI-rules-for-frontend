@@ -49,9 +49,22 @@
 
 ## 🚀 快速开始
 
+### 快速开始矩阵
+
+| 项目 | 质量级别 | 推荐预设 |
+|---|---|---|
+| 单人 | 高 | `frontend/rules/presets/solo-medium.md` + `quality-level/high.*` |
+| 单人 | 中 | `frontend/rules/presets/solo-medium.md` + `quality-level/medium.*` |
+| 单人 | 低 | `frontend/rules/presets/solo-low.md` + `quality-level/low.*` |
+| 小组(3-5) | 高 | `frontend/rules/presets/team-high.md` + `quality-level/high.*` |
+| 小组(3-5) | 中 | `frontend/rules/presets/team-medium.md` + `quality-level/medium.*` |
+| 小组(3-5) | 低 | `frontend/rules/presets/team-low.md` + `quality-level/low.*` |
+
+可选：Less 或 i18n 变体见 `frontend/rules/presets/*-less.md`、`*-i18n.md`。
+
 ### 1. 选择项目规范
 
-根据团队规模选择对应的代码规范配置：
+根据团队规模选择对应的代码规范配置（亦可参考预设索引 `frontend/rules/presets/index.json`）：
 
 ```bash
 # 单人项目 - 轻量级配置
@@ -73,6 +86,22 @@ export default {
 }
 ```
 
+或直接复制 ESLint/TS 配置：
+
+```bash
+# 高
+cp frontend/rules/quality-level/high.eslintrc.js .eslintrc.js
+cp frontend/rules/quality-level/high.tsconfig.json tsconfig.json
+
+# 中
+cp frontend/rules/quality-level/medium.eslintrc.js .eslintrc.js
+cp frontend/rules/quality-level/medium.tsconfig.json tsconfig.json
+
+# 低
+cp frontend/rules/quality-level/low.eslintrc.js .eslintrc.js
+cp frontend/rules/quality-level/low.tsconfig.json tsconfig.json
+```
+
 ### 3. 配置 Prompt 上下文
 
 在与 AI 对话前，提供必要的项目上下文：
@@ -84,6 +113,11 @@ export default {
 - 目标：[描述你要实现的功能]
 - 约束：[特殊要求或限制]
 ```
+
+快捷入口：优先阅读各文档顶部的「快速清单」
+- 01 Prompt 与规范的清单：命名/目录/状态/a11y/i18n/验证
+- 02 质量检查的清单：分级要求与测试/a11y/性能阈值
+- 03 流程清单：设计到代码、计划、验证、回滚与安全
 
 ## 🔧 技术栈
 

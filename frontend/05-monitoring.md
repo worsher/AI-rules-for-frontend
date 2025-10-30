@@ -347,6 +347,64 @@ AI 是否正确理解了需求？
 
 ---
 
+## 隐私与合规
+
+- PII 脱敏：日志中对姓名、邮箱、手机号等敏感信息做掩码或不记录。
+- 可关闭：提供环境变量或配置开关，允许在敏感分支/环境停用日志。
+- 保留策略：仅保留近 90 天数据；支持一键清理（脚本）。
+- 最小化：只记录与质量改进相关的字段，不记录代码全文。
+
+---
+
+## CLI 汇总脚本示例（输出 Markdown 报告）
+
+```javascript
+// scripts/ai-report.js
+const fs = require('fs')
+const path = require('path')
+
+function loadAllLogs(dir = '.ai-logs') {
+  if (!fs.existsSync(dir)) return []
+  const entries = []
+  for (const ym of fs.readdirSync(dir)) {
+    const ymDir = path.join(dir, ym)
+    if (!fs.statSync(ymDir).isDirectory()) continue
+    for (const f of fs.readdirSync(ymDir)) {
+      if (!f.endsWith('.json')) continue
+      const arr = JSON.parse(fs.readFileSync(path.join(ymDir, f), 'utf-8'))
+      entries.push(...arr)
+    }
+  }
+  return entries
+}
+
+function main() {
+  const logs = loadAllLogs()
+  const total = logs.length
+  const success = logs.filter(l => l.result === 'success').length
+  const byType = {}
+  logs.forEach(l => { byType[l.type] = (byType[l.type] || 0) + 1 })
+
+  console.log('# AI 代码生成周报')
+  console.log(`\n- 总次数：${total}`)
+  console.log(`- 成功：${success}（${total ? ((success/total)*100).toFixed(1) : 0}%）`)
+  console.log('\n## 按类型分布')
+  Object.entries(byType).forEach(([k, v]) => console.log(`- ${k}: ${v}`))
+}
+
+main()
+```
+
+---
+
+## 问题 → 动作映射
+
+- PropTypes/类型缺失 → 强化模板与 Lint 规则；在计划中新增“类型检查”项。
+- 错误处理薄弱 → 在 Prompt 模板加入三态要求与错误提示规范。
+- BEM/命名不一致 → 链接命名规范文档，增加 Lint 规则与示例。
+- a11y 问题 → 开启 `eslint-plugin-jsx-a11y`，模板加 ARIA 与键盘示例。
+- 性能指标不达标 → 引入懒加载/虚拟滚动；在计划中标注性能预算。
+
 ## 持续优化建议
 
 ### 每周回顾

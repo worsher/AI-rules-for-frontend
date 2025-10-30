@@ -12,6 +12,65 @@
 
 ---
 
+## 使用说明与通用要求
+
+- 三态必备：加载、空、错误（用户可见的友好提示与重试）。
+- a11y：语义标签、ARIA、键盘可达；表单控件配对 label。
+- TS/JS 双版本：每个模板均可用 TS 或 JS；TS 提供显式 Props/返回类型。
+- 测试：优先使用 Vitest + React Testing Library 提供冒烟/关键交互测试。
+- API：统一 axios 实例；拦截器标准化错误；必要时重试/退避。
+- 样式：提供 CSS Modules 与 Tailwind 两种写法的示例；鼓励设计 Token。
+
+### 组件模板（TS 变体示例）
+```tsx
+// src/components/ComponentName/index.tsx
+import type { ReactNode } from 'react'
+import './styles.css'
+
+export interface ComponentNameProps {
+  title: string
+  children?: ReactNode
+  onAction?: () => void
+}
+
+export function ComponentName({ title, children, onAction }: ComponentNameProps) {
+  return (
+    <section aria-labelledby="cmp-title">
+      <h2 id="cmp-title">{title}</h2>
+      <button type="button" onClick={onAction} aria-label="do something">OK</button>
+      {children}
+    </section>
+  )
+}
+```
+
+### 测试模板（Vitest + RTL）
+```tsx
+import { render, screen } from '@testing-library/react'
+import { ComponentName } from './index'
+
+it('renders title', () => {
+  render(<ComponentName title="Hello" />)
+  expect(screen.getByRole('heading', { name: 'Hello' })).toBeInTheDocument()
+})
+```
+
+### Axios 实例与错误归一化（JS）
+```js
+// src/api/request.js
+import axios from 'axios'
+export const http = axios.create({ baseURL: '/api', timeout: 10000 })
+
+http.interceptors.response.use(
+  (res) => res.data,
+  (err) => {
+    const status = err.response?.status
+    const message = err.response?.data?.message || err.message
+    return Promise.reject({ status, message })
+  }
+)
+```
+
 ## 组件模板
 
 ### 模板 1：基础展示组件

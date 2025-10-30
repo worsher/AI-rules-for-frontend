@@ -2,6 +2,19 @@
 
 > 本文档是 AI 代码生成质量保证的核心，详细说明如何通过精心设计的 Prompt 和代码规范来确保生成代码的质量。
 
+## 快速清单（一屏可复制）
+
+- 项目上下文：技术栈、目录、质量级别（高/中/低）、是否 TS
+- 任务上下文：目标、输入/输出、边界条件、性能与体验
+- 命名与目录：组件文件夹（`ComponentName/index.jsx|tsx` + `styles.css|module.css`）
+- 依赖与 API：统一 axios 实例；声明第三方库与版本
+- 状态管理：先局部 state；跨层 Context；复杂用 Zustand/RTK
+- a11y：语义标签、可聚焦、键盘可达、ARIA、对比度、表单 label
+- i18n：文案字典键；日期/数字本地化；考虑 RTL
+- 生成前验证：路径/命名、依赖、冲突、测试需求明确
+- 基线：加载/空/错误三态；错误处理与用户提示；仅开发态日志
+- 交付：代码 + 用法说明 + 测试（视质量级别）
+
 ## 目录
 
 - [第一部分：Prompt 工程基础](#第一部分prompt-工程基础)
@@ -1877,6 +1890,83 @@ export default {
     minApprovals: 1,
   },
 }
+```
+
+---
+
+## 无障碍（a11y）规范
+
+### 目标
+默认生成的 UI 组件应具备良好的可达性：语义正确、可聚焦、可键盘操作、读屏友好、对比度合规。
+
+### 基本要求
+- 使用语义化标签（如 `button`, `nav`, `main`, `header`）。
+- 可交互元素可聚焦并支持键盘（Enter/Space/Escape 等）。
+- 图片有 `alt`；纯装饰图片使用空 `alt=""`。
+- 弹层/对话框管理焦点进入与归还。
+- 表单控件具备可见 `label` 或 `aria-label`，错误信息与控件关联。
+- 颜色对比满足 WCAG AA，建议使用设计 Token 管控。
+
+### 简例（JS）
+```jsx
+function Modal({ open, onClose, title, children }) {
+  if (!open) return null
+  return (
+    <div role="dialog" aria-modal="true" aria-labelledby="modal-title" tabIndex={-1}>
+      <h2 id="modal-title">{title}</h2>
+      <button aria-label="Close" onClick={onClose}>×</button>
+      {children}
+    </div>
+  )
+}
+```
+
+### 简例（TS）
+```tsx
+type ModalProps = { open: boolean; onClose: () => void; title: string; children: React.ReactNode }
+export function Modal({ open, onClose, title, children }: ModalProps) {
+  if (!open) return null
+  return (
+    <div role="dialog" aria-modal="true" aria-labelledby="modal-title" tabIndex={-1}>
+      <h2 id="modal-title">{title}</h2>
+      <button aria-label="Close" onClick={onClose}>×</button>
+      {children}
+    </div>
+  )
+}
+```
+
+---
+
+## 状态管理选型指南
+
+| 场景 | 推荐 | 说明 |
+|---|---|---|
+| 组件内局部交互 | useState/useReducer | 简单直观 |
+| 多组件共享轻量状态 | Context + 自定义 Hook | 避免 props drilling |
+| 中大型领域状态 | Zustand 或 Redux Toolkit | 可扩展、可测试 |
+| 服务端数据 | React Query/SWR | 缓存、重试、失效策略 |
+
+提示：优先使用最简单方案；当跨层共享或副作用复杂时再升级到 Context/状态库。
+
+---
+
+## i18n 要求与 Prompt 建议
+
+- 文案不得硬编码；使用词条键（如 `t('user.name')`）。
+- 日期、数字、货币走本地化；注意复数/性别等语法。
+- a11y 文案与可见文本共用词条键，保持一致性。
+- 预留 RTL 兼容（避免显式 left/right，使用逻辑方向）。
+
+参考：`frontend/rules/base/i18n.md`、`frontend/rules/base/naming.md`、`frontend/rules/base/validation.md`、`frontend/rules/base/responsive.md`
+
+### Prompt 片段
+```markdown
+请生成支持 i18n 的组件：
+- 禁止硬编码文案，使用 t('...')
+- 导出可配置的文案键清单
+- 提供 zh-CN 与 en-US 的示例字典
+- a11y 与可见文本共用词条
 ```
 
 ---

@@ -38,6 +38,67 @@
 
 ---
 
+## 与配置文件的映射（可复制）
+
+为便于快速启用不同质量级别，以下示例与 `frontend/rules/quality-level/` 下的配置对应：
+
+```bash
+# 高级别（High）
+cp frontend/rules/quality-level/high.eslintrc.js .eslintrc.js
+cp frontend/rules/quality-level/high.tsconfig.json tsconfig.json
+
+# 中级别（Medium）
+cp frontend/rules/quality-level/medium.eslintrc.js .eslintrc.js
+cp frontend/rules/quality-level/medium.tsconfig.json tsconfig.json
+
+# 低级别（Low）
+cp frontend/rules/quality-level/low.eslintrc.js .eslintrc.js
+cp frontend/rules/quality-level/low.tsconfig.json tsconfig.json
+```
+
+建议在高/中级别中额外启用：`eslint-plugin-jsx-a11y`，并在组件库内默认遵循 a11y 规范。
+
+---
+
+## 按级别的测试与 a11y 最低要求
+
+- 高（High）
+  - 测试：关键路径用例（组件/Hook/API），包含加载/空/错误三态；基础 a11y 断言（如无可聚焦陷阱、aria 属性存在）。
+  - 工具：Vitest + React Testing Library（RTL）。
+  - Lint：开启 `eslint-plugin-jsx-a11y` 严格规则。
+
+- 中（Medium）
+  - 测试：新组件冒烟测试（可渲染、基本交互）。
+  - Lint：启用 `eslint-plugin-jsx-a11y` 的推荐规则。
+
+- 低（Low）
+  - 测试：可选；建议至少保留渲染冒烟测试。
+  - Lint：a11y 可选。
+
+示例（RTL）
+```tsx
+import { render, screen } from '@testing-library/react'
+import UserCard from './index'
+
+it('renders name in user card', () => {
+  render(<UserCard user={{ id: 1, name: 'Alice' }} />)
+  expect(screen.getByText('Alice')).toBeInTheDocument()
+})
+```
+
+---
+
+## 性能指标（Core Web Vitals）建议阈值
+
+- LCP：≤ 2.5s（高），≤ 3.0s（中），≤ 3.5s（低）
+- CLS：≤ 0.1（高/中），≤ 0.15（低）
+- INP：≤ 200ms（高），≤ 300ms（中），≤ 400ms（低）
+
+执行建议：
+- 高：对关键路径设性能预算（体积、请求数、首屏渲染）。
+- 中：关注首屏资源体积与懒加载。
+- 低：容忍度更高，但避免明显卡顿与抖动。
+
 ## 高级别检查 (High)
 
 > 适用于核心模块、生产环境代码、多人协作项目
