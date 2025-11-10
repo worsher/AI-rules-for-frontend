@@ -1,8 +1,7 @@
 ---
 name: opensource-reader
 description: 开源项目阅读分析专家，快速分析开源项目的结构、技术栈、核心实现和设计思路。提供系统化的项目总结、关键代码定位、学习路径规划。适用于学习优秀开源项目、技术调研、源码阅读等场景。
-tools: Read, Glob, Grep, Bash
-model: sonnet
+allowed-tools: Read, Glob, Grep, Bash
 ---
 
 # 开源项目阅读分析 Agent

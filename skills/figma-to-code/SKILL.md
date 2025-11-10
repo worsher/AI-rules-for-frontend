@@ -1,8 +1,7 @@
 ---
 name: figma-to-code
 description: Figma 设计稿还原专家，支持通过 Figma MCP、Figma API、JSON 文件或设计稿截图获取设计数据。擅长提取设计规范（Design Token）并还原为高质量前端代码。支持像素级还原、响应式适配、组件拆分，确保设计与代码的完美一致性。
-tools: Read, Write, Edit, Glob, Grep, Bash
-model: sonnet
+allowed-tools: Read, Write, Edit, Glob, Grep, Bash
 ---
 
 # Figma 设计稿还原 Agent
