@@ -14,7 +14,7 @@
 - **特点**：按需激活、专业度高、项目限定
 - **示例**：Ant Design Pro 专家、React 性能优化、开源阅读
 
-## 📦 包含的 Skills（共4个）
+## 📦 包含的 Skills（共6个）
 
 ### 1. Ant Design Pro 专家 (`antd-pro-expert.md`)
 
@@ -162,6 +162,35 @@
 
 ---
 
+### 6. 图片背景去除专家 (`image-bg-remover.md`)
+
+**适用场景**：批量处理图片、去除背景、生成透明PNG
+
+**核心能力**：
+- ✅ **多种处理方案**：rembg 本地处理（推荐）、remove.bg API
+- ✅ **AI 模型支持**：U2-Net、U2-Net-Human、ISNET 等多种模型
+- ✅ **批量处理**：支持目录批处理、递归处理、文件过滤
+- ✅ **高级功能**：边缘优化、Alpha Matting、添加新背景
+- ✅ **性能优化**：GPU 加速、并行处理、内存管理
+- ✅ **多种场景**：电商产品图、人物证件照、Logo图标、动漫插画
+
+**何时使用**：
+- 电商产品图需要去除背景
+- 批量处理证件照背景
+- Logo 和图标透明化
+- 设计素材预处理
+- 自动化图片处理流程
+
+**使用示例**：
+```bash
+"批量处理 products 目录下的所有图片，去除背景"
+"将这个人物照片去除背景并生成证件照"
+"处理这个 logo 图标，生成透明背景版本"
+"使用动漫模型处理插画图片"
+```
+
+---
+
 ## 🚀 如何使用 Skills
 
 ### 方式 1：自动识别（推荐）
@@ -222,7 +251,7 @@ Claude 会根据你的项目和问题自动选择合适的 skill：
 │   ├── project-manager.md
 │   └── README.md
 │
-└── skills/                          # 专项技能 Skills（4个）
+└── skills/                          # 专项技能 Skills（6个）
     ├── antd-pro-expert/
     │   └── SKILL.md                 # Ant Design Pro 专家
     ├── figma-to-code/
@@ -233,6 +262,8 @@ Claude 会根据你的项目和问题自动选择合适的 skill：
     │   └── SKILL.md                 # 开源项目阅读
     ├── autochess-designer/
     │   └── SKILL.md                 # 自走棋设计专家
+    ├── image-bg-remover/
+    │   └── SKILL.md                 # 图片背景去除专家
     └── README.md                    # 本文档
 ```
 
@@ -281,6 +312,11 @@ Claude 会根据你的项目和问题自动选择合适的 skill：
 - `sketch-to-code` - Sketch 设计稿转代码
 - `design-system-builder` - 设计系统构建
 - `ai-design-assistant` - AI 辅助设计
+
+### 图片处理类
+- `image-optimizer` - 图片压缩优化
+- `image-format-converter` - 图片格式转换
+- `image-watermark` - 批量添加水印
 
 ---
 
