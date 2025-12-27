@@ -14,7 +14,7 @@
 - **特点**：按需激活、专业度高、项目限定
 - **示例**：Ant Design Pro 专家、React 性能优化、开源阅读
 
-## 📦 包含的 Skills（共6个）
+## 📦 包含的 Skills（共7个）
 
 ### 1. Ant Design Pro 专家 (`antd-pro-expert.md`)
 
@@ -73,7 +73,39 @@
 
 ---
 
-### 3. React 性能优化专家 (`react-performance-optimization.md`)
+### 3. 设计规范分析专家 (`design-spec-analyzer.md`)
+
+**适用场景**：项目设计规范提取、Design Token 文档化、设计系统审计
+
+**核心能力**：
+- ✅ **多样式格式支持**：CSS 变量、Less/Sass 变量、组件内联样式
+- ✅ **Design Token 提取**：颜色、字体、间距、圆角、阴影等系统
+- ✅ **智能分析**：变量使用统计、硬编码检测、相似颜色合并
+- ✅ **间距系统检测**：自动检测基数和比例类型（线性/斐波那契/指数）
+- ✅ **一致性评分**：计算设计规范使用率，评估项目质量
+- ✅ **可视化文档**：生成包含色板、统计图表的 Markdown 文档
+- ✅ **优化建议**：按优先级提供可操作的改进建议
+
+**何时使用**：
+- 需要梳理项目的设计规范
+- 建立或完善设计系统文档
+- 检查设计一致性问题
+- 发现硬编码值和不规范使用
+- 定期审计设计质量
+- 新成员了解项目设计规范
+
+**使用示例**：
+```bash
+"分析整个项目的设计规范，生成详细文档"
+"分析 src/pages/Dashboard/ 的设计规范"
+"快速检查项目的设计一致性"
+"分析项目的间距系统，检测是否符合 8px 网格"
+"对比两个目录的设计规范差异"
+```
+
+---
+
+### 4. React 性能优化专家 (`react-performance-optimization.md`)
 
 **适用项目**：所有 React 项目（特别是复杂应用）
 
@@ -102,7 +134,7 @@
 
 ---
 
-### 4. 开源项目阅读专家 (`opensource-reader.md`)
+### 5. 开源项目阅读专家 (`opensource-reader.md`)
 
 **适用场景**：学习优秀开源项目、技术调研、源码阅读
 
@@ -131,7 +163,7 @@
 
 ---
 
-### 5. 自走棋设计专家 (`autochess-designer.md`)
+### 6. 自走棋设计专家 (`autochess-designer.md`)
 
 **适用场景**:自走棋类游戏的完整设计,包括英雄、羁绊、装备、经济等系统
 
@@ -162,7 +194,7 @@
 
 ---
 
-### 6. 图片背景去除专家 (`image-bg-remover.md`)
+### 7. 图片背景去除专家 (`image-bg-remover.md`)
 
 **适用场景**：批量处理图片、去除背景、生成透明PNG
 
@@ -251,11 +283,13 @@ Claude 会根据你的项目和问题自动选择合适的 skill：
 │   ├── project-manager.md
 │   └── README.md
 │
-└── skills/                          # 专项技能 Skills（6个）
+└── skills/                          # 专项技能 Skills（7个）
     ├── antd-pro-expert/
     │   └── SKILL.md                 # Ant Design Pro 专家
     ├── figma-to-code/
     │   └── SKILL.md                 # Figma 设计稿还原
+    ├── design-spec-analyzer/
+    │   └── SKILL.md                 # 设计规范分析专家
     ├── react-performance-optimization/
     │   └── SKILL.md                 # React 性能优化
     ├── opensource-reader/
@@ -310,7 +344,8 @@ Claude 会根据你的项目和问题自动选择合适的 skill：
 
 ### 设计工具类
 - `sketch-to-code` - Sketch 设计稿转代码
-- `design-system-builder` - 设计系统构建
+- `design-system-builder` - 设计系统构建（从零搭建）
+- `design-token-generator` - Design Token 自动生成
 - `ai-design-assistant` - AI 辅助设计
 
 ### 图片处理类
@@ -343,6 +378,12 @@ Claude 会根据你的项目和问题自动选择合适的 skill：
 @antd-pro-expert 分析项目结构
 → @react-performance-optimization 性能优化
 → @code-reviewer 审查优化后的代码
+
+# 场景：设计规范化流程
+@design-spec-analyzer 分析现有项目设计规范
+→ @figma-to-code 获取 Figma 设计稿的 Design Token
+→ @design-spec-auditor (Agent) 对比差异，生成规范文档
+→ @component-generator (Agent) 基于规范生成新组件
 ```
 
 ### 3. 从 Skill 学习
