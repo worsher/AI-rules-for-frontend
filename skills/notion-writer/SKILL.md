@@ -193,15 +193,19 @@ function tokensToNotionBlocks(tokens) {
 
       case 'list': {
         for (const item of token.items) {
-          const text = item.text.replace(/^\[[ x]\] /, '');
-          const isCheckbox = /^\[[ x]\] /.test(item.text);
-          const isChecked = /^\[x\] /i.test(item.text);
+          // marked v4+ 直接提供 item.task 和 item.checked
+          // 兼容旧版：fallback 到正则解析
+          const isCheckbox = item.task != null ? item.task : /^\[[ x]\] /.test(item.text);
+          const isChecked = item.task != null ? item.checked : /^\[x\] /i.test(item.text);
+          const itemText = item.task != null
+            ? item.text  // marked v4+ 已去除 checkbox 前缀
+            : item.text.replace(/^\[[ x]\] /, '');
 
           if (isCheckbox) {
             blocks.push({
               type: 'to_do',
               to_do: {
-                rich_text: parseInlineContent(text),
+                rich_text: parseInlineContent(itemText),
                 checked: isChecked
               }
             });
@@ -221,10 +225,14 @@ function tokensToNotionBlocks(tokens) {
       }
 
       case 'blockquote': {
-        // blockquote 内部可能有多个 token，合并为文本
-        const quoteText = token.tokens
-          ? token.tokens.map(t => t.text || '').join('\n')
-          : token.text;
+        // blockquote 内 tokens 是段落数组，提取每个段落的 text
+        let quoteText = token.text || '';
+        if (token.tokens && token.tokens.length > 0) {
+          quoteText = token.tokens
+            .map(t => t.text || (t.tokens ? t.tokens.map(st => st.raw || st.text || '').join('') : ''))
+            .filter(Boolean)
+            .join('\n');
+        }
         blocks.push({
           type: 'quote',
           quote: { rich_text: parseInlineContent(quoteText) }
